@@ -1,6 +1,6 @@
 -- ==============================================================================
 -- ResumeFit Supabase PostgreSQL Database Schema
--- Version: 1.0.0
+-- Version: 1.1.0
 -- Architecture: Row Level Security (RLS) with strict User Isolation
 -- ==============================================================================
 
@@ -15,10 +15,12 @@ create table if not exists public.profiles (
   email text not null default '',
   phone text default '',
   location text default '',
+  professional_title text default '',
   professional_summary text default '',
   linkedin_url text default '',
   github_url text default '',
   portfolio_url text default '',
+  other_url text default '',
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
@@ -29,8 +31,10 @@ create table if not exists public.education (
   user_id uuid references auth.users(id) on delete cascade not null,
   degree text not null,
   institution text not null,
+  field_of_study text default '',
   start_date text not null default '',
   end_date text not null default '',
+  grade text default '',
   description text default '',
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
@@ -69,6 +73,8 @@ create table if not exists public.projects (
   description text not null default '',
   technologies text[] default array[]::text[],
   project_link text default '',
+  start_date text default '',
+  end_date text default '',
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

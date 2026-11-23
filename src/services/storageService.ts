@@ -16,11 +16,13 @@ export const DEFAULT_SAMPLE_PROFILE: UserProfile = {
     email: 'alex.morgan@example.com',
     phone: '+1 (555) 345-6789',
     location: 'San Francisco, CA',
+    professionalTitle: 'Frontend Software Engineer',
     professionalSummary:
       'Passionate and results-focused Frontend Engineer with a strong foundation in modern JavaScript, React, and responsive UI design. Proven track record building fast, accessible web applications and collaborating on agile product teams.',
     linkedinUrl: 'https://linkedin.com/in/alexmorgan',
     githubUrl: 'https://github.com/alexmorgan',
     portfolioUrl: 'https://alexmorgan.dev',
+    otherUrl: 'https://dev.to/alexmorgan',
   },
   skills: [
     { id: 'sk-1', name: 'HTML5', category: 'technical', level: 'advanced' },
@@ -39,8 +41,10 @@ export const DEFAULT_SAMPLE_PROFILE: UserProfile = {
       id: 'edu-1',
       degree: 'B.S. in Computer Science',
       institution: 'University of California, Berkeley',
+      fieldOfStudy: 'Computer Science & Engineering',
       startDate: '2020',
       endDate: '2024',
+      grade: '3.8 / 4.0 GPA',
       description: 'Coursework in Data Structures, Web Architecture, Algorithms, and UI Engineering.',
     },
   ],
@@ -70,6 +74,8 @@ export const DEFAULT_SAMPLE_PROFILE: UserProfile = {
         'A fully responsive online store featuring real-time product filtering, search debouncing, and cart persistence using React and Tailwind CSS.',
       technologies: ['React', 'JavaScript', 'Tailwind CSS', 'REST APIs'],
       projectLink: 'https://github.com/alexmorgan/ecommerce-store',
+      startDate: 'Jan 2024',
+      endDate: 'Apr 2024',
     },
     {
       id: 'prj-2',
@@ -78,6 +84,8 @@ export const DEFAULT_SAMPLE_PROFILE: UserProfile = {
         'Lightweight personal CRM for tracking internship and job applications with status boards, notes, and local storage caching.',
       technologies: ['React', 'TypeScript', 'CSS3', 'HTML5'],
       projectLink: 'https://github.com/alexmorgan/app-tracker',
+      startDate: 'May 2024',
+      endDate: 'Jun 2024',
     },
   ],
   certifications: [
@@ -90,6 +98,28 @@ export const DEFAULT_SAMPLE_PROFILE: UserProfile = {
     },
   ],
 }
+
+// Blank profile template for clean user onboarding
+export const createEmptyProfile = (userId: string, email = ''): UserProfile => ({
+  userId,
+  personal: {
+    fullName: '',
+    email,
+    phone: '',
+    location: '',
+    professionalTitle: '',
+    professionalSummary: '',
+    linkedinUrl: '',
+    githubUrl: '',
+    portfolioUrl: '',
+    otherUrl: '',
+  },
+  education: [],
+  skills: [],
+  experience: [],
+  projects: [],
+  certifications: [],
+})
 
 // Helper keys for local demo mode isolation
 const getStorageKey = (userId: string, key: string) => `resumefit_user_${userId}_${key}`
@@ -125,17 +155,21 @@ export const storageService = {
               email: profileData.email || '',
               phone: profileData.phone || '',
               location: profileData.location || '',
+              professionalTitle: profileData.professional_title || '',
               professionalSummary: profileData.professional_summary || '',
               linkedinUrl: profileData.linkedin_url || '',
               githubUrl: profileData.github_url || '',
               portfolioUrl: profileData.portfolio_url || '',
+              otherUrl: profileData.other_url || '',
             },
             education: (eduRes.data || []).map((e) => ({
               id: e.id,
               degree: e.degree,
               institution: e.institution,
+              fieldOfStudy: e.field_of_study || '',
               startDate: e.start_date,
               endDate: e.end_date,
+              grade: e.grade || '',
               description: e.description,
             })),
             skills: (skillsRes.data || []).map((s) => ({
@@ -160,6 +194,8 @@ export const storageService = {
               description: p.description,
               technologies: p.technologies || [],
               projectLink: p.project_link,
+              startDate: p.start_date || '',
+              endDate: p.end_date || '',
             })),
             certifications: (certRes.data || []).map((c) => ({
               id: c.id,
@@ -181,17 +217,23 @@ export const storageService = {
       try {
         return JSON.parse(saved)
       } catch {
-        // Corrupted JSON, reset to default
+        // Corrupted JSON, reset
       }
     }
 
-    // Initialize with default template
+    // Initialize with default template or blank profile
     const initialProfile = { ...DEFAULT_SAMPLE_PROFILE, userId }
     localStorage.setItem(getStorageKey(userId, 'profile'), JSON.stringify(initialProfile))
     return initialProfile
   },
 
   async saveUserProfile(userId: string, profile: UserProfile): Promise<void> {
+    const updatedProfile = {
+      ...profile,
+      userId,
+      updatedAt: new Date().toISOString(),
+    }
+
     if (isSupabaseConfigured && supabase) {
       try {
         await supabase.from('profiles').upsert({
@@ -200,11 +242,13 @@ export const storageService = {
           email: profile.personal.email,
           phone: profile.personal.phone,
           location: profile.personal.location,
+          professional_title: profile.personal.professionalTitle || '',
           professional_summary: profile.personal.professionalSummary,
           linkedin_url: profile.personal.linkedinUrl,
           github_url: profile.personal.githubUrl,
           portfolio_url: profile.personal.portfolioUrl,
-          updated_at: new Date().toISOString(),
+          other_url: profile.personal.otherUrl || '',
+          updated_at: updatedProfile.updatedAt,
         })
 
         // Replace education entries
@@ -215,8 +259,10 @@ export const storageService = {
               user_id: userId,
               degree: e.degree,
               institution: e.institution,
+              field_of_study: e.fieldOfStudy || '',
               start_date: e.startDate,
               end_date: e.endDate,
+              grade: e.grade || '',
               description: e.description,
             }))
           )
@@ -262,6 +308,8 @@ export const storageService = {
               description: p.description,
               technologies: p.technologies,
               project_link: p.projectLink,
+              start_date: p.startDate || '',
+              end_date: p.endDate || '',
             }))
           )
         }
@@ -274,7 +322,7 @@ export const storageService = {
               user_id: userId,
               name: c.name,
               issuing_org: c.issuingOrg,
-              issueDate: c.issueDate,
+              issue_date: c.issueDate,
               credential_url: c.credentialUrl,
             }))
           )
@@ -285,7 +333,14 @@ export const storageService = {
     }
 
     // Always update local cache for offline resiliency
-    localStorage.setItem(getStorageKey(userId, 'profile'), JSON.stringify(profile))
+    localStorage.setItem(getStorageKey(userId, 'profile'), JSON.stringify(updatedProfile))
+  },
+
+  // Reset profile to blank or default sample
+  async resetProfile(userId: string, toSample = false): Promise<UserProfile> {
+    const fresh = toSample ? { ...DEFAULT_SAMPLE_PROFILE, userId } : createEmptyProfile(userId)
+    await this.saveUserProfile(userId, fresh)
+    return fresh
   },
 
   // --------------------------------------------------------------------------

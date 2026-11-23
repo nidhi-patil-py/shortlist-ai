@@ -3,18 +3,22 @@ export interface PersonalDetails {
   email: string
   phone: string
   location: string
+  professionalTitle?: string
   professionalSummary: string
   linkedinUrl?: string
   githubUrl?: string
   portfolioUrl?: string
+  otherUrl?: string
 }
 
 export interface EducationItem {
   id: string
   degree: string
   institution: string
+  fieldOfStudy?: string
   startDate: string
   endDate: string
+  grade?: string
   description?: string
 }
 
@@ -42,6 +46,8 @@ export interface ProjectItem {
   description: string
   technologies: string[]
   projectLink?: string
+  startDate?: string
+  endDate?: string
 }
 
 export interface CertificationItem {

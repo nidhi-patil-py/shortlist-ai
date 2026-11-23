@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/matcher" className="text-slate-600 hover:text-indigo-600 transition-colors">
-                  Job Matcher
+                  JD Matcher
                 </Link>
               </li>
               <li>
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="#how-it-works" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                <a href="/#how-it-works" className="text-slate-600 hover:text-indigo-600 transition-colors">
                   How Matching Works
                 </a>
               </li>

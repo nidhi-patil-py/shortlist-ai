@@ -15,7 +15,6 @@ export const Navbar: React.FC = () => {
   // Links for visitors vs logged-in users
   const publicNavLinks = [
     { name: 'How It Works', href: '/#how-it-works' },
-    { name: 'Features', href: '/#features' },
     { name: 'ATS Demo', href: '/#demo' },
     { name: 'Pricing', href: '/#pricing' },
     { name: 'FAQ', href: '/#faq' },

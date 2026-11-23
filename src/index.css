@@ -14,6 +14,18 @@
     --border-subtle: #E2E8F0;
   }
 
+  /* Warm Espresso & Amber Signature Dark Palette */
+  .dark {
+    --bg-main: #12100E;
+    --card-bg: #1C1917;
+    --border-subtle: #2E2925;
+    --text-main: #FAF8F5;
+    --text-muted: #A8A29E;
+    --primary: #F59E0B;
+    --primary-hover: #D97706;
+    --primary-light: #2A1D0D;
+  }
+
   body {
     background-color: var(--bg-main);
     color: var(--text-main);
@@ -25,12 +37,77 @@
   }
 }
 
+/* Map Tailwind v4 color tokens across dark mode utilities */
+:where(.dark, .dark *) {
+  /* Warm Charcoal Espresso background */
+  --color-slate-950: #12100E;
+
+  /* Stone Dark cards & surfaces */
+  --color-slate-900: #1C1917;
+
+  /* Warm Espresso borders */
+  --color-slate-800: #2E2925;
+  --color-slate-700: #3E3833;
+
+  /* Muted Text */
+  --color-slate-500: #78716C;
+  --color-slate-400: #A8A29E;
+  --color-slate-300: #D6D0C7;
+  --color-slate-200: #EDE8E2;
+
+  /* Primary Text */
+  --color-slate-100: #FAF8F5;
+  --color-slate-50: #FFFFFF;
+
+  /* Primary Accent: Warm Amber Gold (#F59E0B, hover #D97706) */
+  --color-indigo-600: #F59E0B;
+  --color-indigo-700: #D97706;
+  --color-indigo-500: #FBBF24;
+  --color-indigo-400: #F59E0B;
+  --color-indigo-300: #FCD34D;
+  --color-indigo-200: #FDE68A;
+  --color-indigo-100: #FEF3C7;
+  --color-indigo-50: #2A1D0D;
+  --color-indigo-950: #241A0E;
+  --color-indigo-900: #3D2810;
+  --color-indigo-800: #5C3814;
+}
+
+/* Dark text (#12100E) on filled amber buttons in dark mode */
+:where(.dark, .dark *) .bg-indigo-600.text-white,
+:where(.dark, .dark *) button.bg-indigo-600,
+:where(.dark, .dark *) a.bg-indigo-600 {
+  color: #12100E !important;
+  font-weight: 600;
+}
+
+/* Strict Recruiter Single-Column ATS White Paper Isolation */
+.resume-paper,
+.resume-paper * {
+  --color-slate-950: #020617 !important;
+  --color-slate-900: #0f172a !important;
+  --color-slate-800: #1e293b !important;
+  --color-slate-700: #334155 !important;
+  --color-slate-600: #475569 !important;
+  --color-slate-500: #64748b !important;
+  --color-slate-400: #94a3b8 !important;
+  --color-slate-100: #f1f5f9 !important;
+  --color-indigo-900: #312e81 !important;
+  --color-indigo-600: #4f46e5 !important;
+  --color-indigo-200: #c7d2fe !important;
+}
+
+.resume-paper {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
 /* Custom smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar for modern browsers */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -44,6 +121,17 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #12100E;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2E2925;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3E3833;
 }
 
 /* Print and PDF generation styles */

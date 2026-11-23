@@ -21,8 +21,8 @@ assert(indexHtml.includes("classList.add('dark')"), "index.html must add 'dark' 
 assert(indexHtml.includes("classList.remove('dark')"), "index.html must remove 'dark' class for light mode")
 console.log('  ✓ Zero-flash inline script verified in <head>')
 
-// 3. Tailwind CSS v4 Dark Variant Setup
-console.log('\nTest 3: Tailwind CSS v4 Dark Mode Configuration in index.css')
+// 3. Tailwind CSS v4 Dark Variant & Signature "Warm Espresso & Amber" Palette
+console.log('\nTest 3: Tailwind CSS v4 Dark Mode & Warm Espresso Palette in index.css')
 const cssPath = path.resolve('src/index.css')
 assert(fs.existsSync(cssPath), 'src/index.css must exist')
 const cssContent = fs.readFileSync(cssPath, 'utf-8')
@@ -34,7 +34,14 @@ assert(
   cssContent.includes('.resume-paper'),
   'src/index.css must declare .resume-paper rules'
 )
-console.log('  ✓ Tailwind CSS v4 dark variant & resume paper rules verified')
+assert(cssContent.includes('#12100E'), 'index.css must configure #12100E (Warm Charcoal Espresso background)')
+assert(cssContent.includes('#1C1917'), 'index.css must configure #1C1917 (Stone Dark cards & surfaces)')
+assert(cssContent.includes('#2E2925'), 'index.css must configure #2E2925 (Warm Espresso borders)')
+assert(cssContent.includes('#FAF8F5'), 'index.css must configure #FAF8F5 (Primary text)')
+assert(cssContent.includes('#A8A29E'), 'index.css must configure #A8A29E (Muted text)')
+assert(cssContent.includes('#F59E0B'), 'index.css must configure #F59E0B (Warm Amber Gold accent)')
+assert(cssContent.includes('#D97706'), 'index.css must configure #D97706 (Amber hover state)')
+console.log('  ✓ Signature Warm Espresso & Amber color tokens verified in index.css')
 
 // 4. White Paper Invariant for ATS Resumes
 console.log('\nTest 4: Strict Recruiter ATS White Paper Invariant')

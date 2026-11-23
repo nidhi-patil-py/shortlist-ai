@@ -12,11 +12,9 @@ import {
   User,
   Target,
   Calendar,
-  CheckCircle2,
   Trash2,
   Edit3,
   Eye,
-  ShieldCheck,
   Sparkles,
   Gauge,
   Printer,
@@ -25,7 +23,7 @@ import { exportResumeViaPrint } from '../services/pdfExportService'
 import { PWAInstallPrompt } from '../components/common/PWAInstallPrompt'
 
 export const DashboardPage: React.FC = () => {
-  const { user, isDemoMode, isSupabaseConfigured } = useAuth()
+  const { user, isDemoMode } = useAuth()
 
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [resumes, setResumes] = useState<ResumeData[]>([])
@@ -155,94 +153,98 @@ export const DashboardPage: React.FC = () => {
         {/* PWA Install Banner */}
         <PWAInstallPrompt variant="banner" />
 
-        {/* Quick Stat Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {/* Profile Completion Card */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                Profile Completeness
-              </span>
-              <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                <User className="w-4 h-4" />
-              </div>
-            </div>
+        {/* 3 Primary Action Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Action 1: Paste Job Description */}
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-indigo-400 dark:hover:border-indigo-500 transition-all group">
             <div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-black text-slate-900 dark:text-white">{completionPct}%</span>
-                <span className="text-xs text-slate-500 dark:text-slate-400">
-                  {completionPct === 100 ? 'Ready for matching' : 'Complete remaining fields'}
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-full border border-indigo-200 dark:border-indigo-800">
+                  Core Tool • 1-Click Match
                 </span>
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Target className="w-5 h-5" />
+                </div>
               </div>
-              <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden mt-3">
-                <div
-                  className="bg-indigo-600 dark:bg-indigo-500 h-full rounded-full transition-all duration-300"
-                  style={{ width: `${completionPct}%` }}
-                />
-              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                Paste Job Description
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Scan job requirements, match genuine technical skills, and prioritize relevant experience with zero hallucination.
+              </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-              <Link to="/profile" className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">
-                View Profile Details →
+            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <Link
+                to="/matcher"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-semibold transition-colors shadow-xs"
+              >
+                <span>Match Job Description</span>
+                <Plus className="w-4 h-4" />
               </Link>
             </div>
           </div>
 
-          {/* Resumes Count Card */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                Total Tailored Resumes
-              </span>
-              <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                <FileText className="w-4 h-4" />
-              </div>
-            </div>
+          {/* Action 2: My Tailored Resumes */}
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-indigo-400 dark:hover:border-indigo-500 transition-all group">
             <div>
-              <div className="text-3xl font-black text-slate-900 dark:text-white">{resumes.length}</div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                Customized for specific job openings
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700">
+                  {resumes.length} {resumes.length === 1 ? 'Resume' : 'Resumes'} Saved
+                </span>
+                <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <FileText className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                My Tailored Resumes
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                View, fine-tune, preview, and download recruiter-compliant single-column A4/Letter vector PDFs.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-              <Link to="/matcher" className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">
-                Match New Job Description →
-              </Link>
+            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <a
+                href="#resumes"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/60 text-xs sm:text-sm font-semibold transition-colors"
+              >
+                <span>View All Resumes ({resumes.length})</span>
+                <Eye className="w-4 h-4 text-slate-500" />
+              </a>
             </div>
           </div>
 
-          {/* Storage Mode & Security Status Card */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                Data Security
-              </span>
-              <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                <ShieldCheck className="w-4 h-4" />
-              </div>
-            </div>
+          {/* Action 3: Master Profile */}
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between hover:border-indigo-400 dark:hover:border-indigo-500 transition-all group">
             <div>
-              <div className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span>
-                  {isSupabaseConfigured ? 'Supabase RLS Enabled' : 'Isolated Local Storage'}
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                  {completionPct}% Complete
                 </span>
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <User className="w-5 h-5" />
+                </div>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                {isSupabaseConfigured
-                  ? 'All records isolated by user_id in PostgreSQL.'
-                  : 'Operating in isolated sandbox on your local device.'}
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                Master Profile
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Single source of truth. Manage verified skills, experience, and education, or import from LinkedIn / Resume PDF.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-              <span>Single Column ATS Safe</span>
-              <span className="font-semibold text-emerald-600 dark:text-emerald-400">Active</span>
+            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <Link
+                to="/profile"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/60 text-xs sm:text-sm font-semibold transition-colors"
+              >
+                <span>Edit Master Profile</span>
+                <Edit3 className="w-4 h-4 text-slate-500" />
+              </Link>
             </div>
           </div>
         </div>
 
         {/* Saved Resumes List Section */}
-        <div className="space-y-4">
+        <div id="resumes" className="space-y-4 pt-2">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">Your Tailored Resumes</h2>

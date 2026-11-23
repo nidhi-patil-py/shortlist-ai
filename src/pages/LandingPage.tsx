@@ -11,7 +11,7 @@ import { FaqSection } from '../components/landing/FaqSection'
 
 export const LandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] dark:bg-slate-950 transition-colors duration-200">
       <Navbar />
       <main className="flex-grow">
         <HeroSection />

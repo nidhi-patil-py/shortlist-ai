@@ -177,7 +177,7 @@ export const BuilderPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] dark:bg-slate-950">
       <div className="no-print">
         <DemoModeBanner />
         <Navbar />
@@ -185,25 +185,25 @@ export const BuilderPage: React.FC = () => {
 
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full space-y-6">
         {/* Top Control Bar */}
-        <div className="no-print bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="no-print bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 self-start sm:self-auto">
             <Link
               to="/dashboard"
-              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               title="Back to Dashboard"
             >
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+                <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                   {resume?.title || 'Resume Builder'}
                 </h1>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
                   ATS Ready
                 </span>
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Single-column recruiter-compliant builder with real-time preview
               </p>
             </div>
@@ -213,19 +213,19 @@ export const BuilderPage: React.FC = () => {
             {/* ATS Score Check */}
             <Link
               to={resume ? `/ats-checker?id=${resume.id}` : '/ats-checker'}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 transition-colors shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors shadow-2xs"
             >
-              <Gauge className="w-4 h-4 text-indigo-600" />
+              <Gauge className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               <span>ATS Score</span>
             </Link>
 
             {/* Full Preview */}
             <Link
               to={resume ? `/preview?id=${resume.id}` : '/preview'}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors shadow-2xs"
               title="Full Screen Preview & PDF Downloads"
             >
-              <Eye className="w-4 h-4 text-slate-600" />
+              <Eye className="w-4 h-4 text-slate-600 dark:text-slate-400" />
               <span>Preview</span>
             </Link>
 
@@ -233,10 +233,10 @@ export const BuilderPage: React.FC = () => {
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
               title="Download ATS Vector PDF"
             >
-              <Printer className="w-4 h-4 text-slate-600" />
+              <Printer className="w-4 h-4 text-slate-600 dark:text-slate-400" />
               <span>Print PDF</span>
             </button>
 
@@ -245,7 +245,7 @@ export const BuilderPage: React.FC = () => {
               type="button"
               onClick={handleSave}
               disabled={isSaving || !resume}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-sm shadow-indigo-200 active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-sm shadow-indigo-200 dark:shadow-none active:scale-[0.98]"
             >
               {isSaving ? (
                 <>
@@ -264,8 +264,8 @@ export const BuilderPage: React.FC = () => {
 
         {/* Notifications */}
         {saveSuccess && (
-          <div className="no-print p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-800 flex items-center gap-2.5 animate-in slide-in-from-top-2">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+          <div className="no-print p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-xs sm:text-sm text-emerald-800 dark:text-emerald-300 flex items-center gap-2.5 animate-in slide-in-from-top-2">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span className="font-semibold">
               Resume saved successfully! It is now stored and ready for ATS export.
             </span>
@@ -273,21 +273,21 @@ export const BuilderPage: React.FC = () => {
         )}
 
         {errorMessage && (
-          <div className="no-print p-4 rounded-xl bg-rose-50 border border-rose-200 text-xs sm:text-sm text-rose-800 flex items-center gap-2.5">
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+          <div className="no-print p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-xs sm:text-sm text-rose-800 dark:text-rose-300 flex items-center gap-2.5">
+            <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {/* Mobile View Switcher (Visible only on < lg screens) */}
-        <div className="no-print lg:hidden flex rounded-xl bg-slate-200 p-1">
+        <div className="no-print lg:hidden flex rounded-xl bg-slate-200 dark:bg-slate-800 p-1">
           <button
             type="button"
             onClick={() => setMobileTab('editor')}
             className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
               mobileTab === 'editor'
-                ? 'bg-white text-indigo-700 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-400 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
             <Edit3 className="w-4 h-4" />
@@ -298,8 +298,8 @@ export const BuilderPage: React.FC = () => {
             onClick={() => setMobileTab('preview')}
             className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
               mobileTab === 'preview'
-                ? 'bg-white text-indigo-700 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-400 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
             <Eye className="w-4 h-4" />
@@ -308,9 +308,9 @@ export const BuilderPage: React.FC = () => {
         </div>
 
         {loading || !resume ? (
-          <div className="no-print bg-white rounded-2xl p-16 border border-slate-200 text-center space-y-3">
+          <div className="no-print bg-white dark:bg-slate-900 rounded-2xl p-16 border border-slate-200 dark:border-slate-800 text-center space-y-3">
             <div className="w-8 h-8 border-3 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto" />
-            <p className="text-xs text-slate-500 font-medium">Preparing ATS template & resume data...</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Preparing ATS template & resume data...</p>
           </div>
         ) : (
           /* Split Layout: Left Editor, Right Live Preview */
@@ -350,12 +350,12 @@ export const BuilderPage: React.FC = () => {
               }`}
             >
               {/* Preview Bar with Zoom and Info */}
-              <div className="no-print w-full flex items-center justify-between pb-3 text-xs text-slate-600">
+              <div className="no-print w-full flex items-center justify-between pb-3 text-xs text-slate-600 dark:text-slate-400">
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold uppercase tracking-wider text-[11px] text-slate-500">
+                  <span className="font-semibold uppercase tracking-wider text-[11px] text-slate-500 dark:text-slate-400">
                     Live Document Preview
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                     A4 • ATS Pass Guarantee
                   </span>
                 </div>
@@ -364,18 +364,18 @@ export const BuilderPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setZoomScale(Math.max(80, zoomScale - 10))}
-                    className="p-1 rounded bg-white border border-slate-200 hover:bg-slate-100 text-slate-600"
+                    className="p-1 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
                     title="Zoom Out"
                   >
                     <ZoomOut className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-[11px] font-mono text-slate-500 w-10 text-center">
+                  <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 w-10 text-center">
                     {zoomScale}%
                   </span>
                   <button
                     type="button"
                     onClick={() => setZoomScale(Math.min(120, zoomScale + 10))}
-                    className="p-1 rounded bg-white border border-slate-200 hover:bg-slate-100 text-slate-600"
+                    className="p-1 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
                     title="Zoom In"
                   >
                     <ZoomIn className="w-3.5 h-3.5" />

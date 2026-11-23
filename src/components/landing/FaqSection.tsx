@@ -47,17 +47,17 @@ export const FaqSection: React.FC = () => {
   }
 
   return (
-    <section id="faq" className="py-20 lg:py-28 bg-[#F8FAFC]">
+    <section id="faq" className="py-20 lg:py-28 bg-[#F8FAFC] dark:bg-slate-950 transition-colors duration-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-200 text-slate-800 text-xs font-semibold">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-semibold">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Got Questions?</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-base text-slate-600">
+          <p className="text-base text-slate-600 dark:text-slate-400">
             Clear, upfront answers about our technology, ATS compatibility, and ethical guidelines.
           </p>
         </div>
@@ -68,7 +68,7 @@ export const FaqSection: React.FC = () => {
             return (
               <div
                 key={item.question}
-                className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs transition-colors"
+                className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs transition-colors"
               >
                 <button
                   type="button"
@@ -76,17 +76,17 @@ export const FaqSection: React.FC = () => {
                   className="w-full text-left px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-4 focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base font-semibold text-slate-900">
+                  <span className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">
                     {item.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-slate-500 transition-transform duration-200 shrink-0 ${
-                      isOpen ? 'rotate-180 text-indigo-600' : ''
+                    className={`w-5 h-5 text-slate-500 dark:text-slate-400 transition-transform duration-200 shrink-0 ${
+                      isOpen ? 'rotate-180 text-indigo-600 dark:text-indigo-400' : ''
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                  <div className="px-5 sm:px-6 pb-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-3">
                     {item.answer}
                   </div>
                 )}
@@ -98,3 +98,5 @@ export const FaqSection: React.FC = () => {
     </section>
   )
 }
+
+export default FaqSection

@@ -63,16 +63,16 @@ export const FeaturesSection: React.FC = () => {
   ]
 
   return (
-    <section id="features" className="py-20 lg:py-28 bg-[#F8FAFC]">
+    <section id="features" className="py-20 lg:py-28 bg-[#F8FAFC] dark:bg-slate-950 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
             Engineered For ATS & Humans
           </h2>
-          <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Everything You Need To Pass Screening Filters
           </p>
-          <p className="text-base sm:text-lg text-slate-600">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
             Modern hiring systems scan hundreds of applications in seconds. ResumeFit aligns your real story with what the software is programmed to find.
           </p>
         </div>
@@ -83,16 +83,16 @@ export const FeaturesSection: React.FC = () => {
             return (
               <div
                 key={feat.title}
-                className="bg-white rounded-xl p-6 border border-slate-200 shadow-xs hover:border-indigo-300 hover:shadow-md transition-all flex flex-col justify-between"
+                className="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 mb-2">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
                     {feat.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     {feat.description}
                   </p>
                 </div>
@@ -104,3 +104,5 @@ export const FeaturesSection: React.FC = () => {
     </section>
   )
 }
+
+export default FeaturesSection

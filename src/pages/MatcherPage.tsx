@@ -143,23 +143,23 @@ export const MatcherPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] dark:bg-slate-950 transition-colors">
       <DemoModeBanner />
       <Navbar />
 
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 w-full space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
           <div>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
                 <Target className="w-4 h-4" />
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Job Description Matcher
               </h1>
             </div>
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
               Match job requirements against your Master Profile without hallucinating false credentials
             </p>
           </div>
@@ -167,7 +167,7 @@ export const MatcherPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/profile"
-              className="text-xs font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-colors shadow-2xs"
+              className="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-2xs"
             >
               Edit Master Profile
             </Link>
@@ -175,28 +175,28 @@ export const MatcherPage: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="bg-white rounded-2xl p-16 border border-slate-200 text-center space-y-3">
-            <div className="w-8 h-8 border-3 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto" />
-            <p className="text-xs text-slate-500 font-medium">Loading your profile for matching...</p>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-16 border border-slate-200 dark:border-slate-800 text-center space-y-3">
+            <div className="w-8 h-8 border-3 border-indigo-200 dark:border-indigo-800 border-t-indigo-600 rounded-full animate-spin mx-auto" />
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Loading your profile for matching...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Column: Job Description Input & Quick Samples */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-5">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                    <FileText className="w-4 h-4 text-indigo-600" />
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-5">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                    <FileText className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                     <span>Paste Target Job Listing</span>
                   </span>
-                  <span className="text-[11px] text-slate-400">Step 1 of 2</span>
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500">Step 1 of 2</span>
                 </div>
 
                 {/* Target Role Inputs */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-                      <Briefcase className="w-3.5 h-3.5 text-slate-400" />
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 flex items-center gap-1">
+                      <Briefcase className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                       <span>Target Role / Title</span>
                     </label>
                     <input
@@ -204,13 +204,13 @@ export const MatcherPage: React.FC = () => {
                       value={targetJobTitle}
                       onChange={(e) => setTargetJobTitle(e.target.value)}
                       placeholder="e.g. Frontend Engineer"
-                      className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs sm:text-sm bg-white"
+                      className="w-full px-3 py-2 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-                      <Building className="w-3.5 h-3.5 text-slate-400" />
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 flex items-center gap-1">
+                      <Building className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                       <span>Target Company</span>
                     </label>
                     <input
@@ -218,15 +218,15 @@ export const MatcherPage: React.FC = () => {
                       value={targetCompany}
                       onChange={(e) => setTargetCompany(e.target.value)}
                       placeholder="e.g. Stripe, Google, Spotify"
-                      className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs sm:text-sm bg-white"
+                      className="w-full px-3 py-2 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                 </div>
 
                 {/* Quick Sample Buttons */}
                 <div className="space-y-1.5 pt-1">
-                  <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-indigo-600" />
+                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
                     <span>Quick Fill with Sample Job Description:</span>
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -235,7 +235,7 @@ export const MatcherPage: React.FC = () => {
                         key={sample.title}
                         type="button"
                         onClick={() => handleLoadSample(sample)}
-                        className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-700 transition-colors"
+                        className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-indigo-800 text-slate-700 dark:text-slate-300 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
                       >
                         + {sample.title}
                       </button>
@@ -246,10 +246,10 @@ export const MatcherPage: React.FC = () => {
                 {/* Textarea */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                       Job Description Text
                     </label>
-                    <span className="text-[11px] text-slate-400">
+                    <span className="text-[11px] text-slate-400 dark:text-slate-500">
                       {jobDescription.length} characters
                     </span>
                   </div>
@@ -258,13 +258,13 @@ export const MatcherPage: React.FC = () => {
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
                     placeholder="Copy and paste the responsibilities, tech stack, and qualifications from the job posting..."
-                    className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-xs sm:text-sm bg-white leading-relaxed focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans"
+                    className="w-full px-3.5 py-3 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 leading-relaxed focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans"
                   />
                 </div>
 
                 {/* Ethical Guarantee Pill */}
-                <div className="p-3 rounded-xl bg-amber-50/80 border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <div className="p-3 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
+                  <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                   <p className="leading-snug">
                     <strong>Zero Hallucination Rule:</strong> ResumeFit will match your genuine skills and prioritize existing relevant projects. We will <em>never</em> inject fake credentials or fake employment history.
                   </p>
@@ -275,38 +275,38 @@ export const MatcherPage: React.FC = () => {
             {/* Right Column: Live Match Breakdown & Tailored Generation */}
             <div className="lg:col-span-6 space-y-6">
               {!analysis ? (
-                <div className="bg-white rounded-2xl p-12 border border-dashed border-slate-300 text-center space-y-3">
-                  <Target className="w-10 h-10 text-slate-400 mx-auto" />
-                  <h3 className="text-base font-bold text-slate-900">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl p-12 border border-dashed border-slate-300 dark:border-slate-800 text-center space-y-3">
+                  <Target className="w-10 h-10 text-slate-400 dark:text-slate-500 mx-auto" />
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
                     Awaiting Job Description
                   </h3>
-                  <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
                     Paste a job description on the left (or click one of our sample jobs) to see real-time keyword matching, gap analysis, and tailored resume generation.
                   </p>
                 </div>
               ) : (
                 <div className="space-y-6 animate-in fade-in duration-300">
                   {/* Match Score Card */}
-                  <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                           Estimated ATS Fit Score
                         </span>
                         <div className="flex items-baseline gap-2 mt-1">
                           <span
                             className={`text-3xl sm:text-4xl font-black ${
                               analysis.matchPercentage >= 75
-                                ? 'text-emerald-600'
+                                ? 'text-emerald-600 dark:text-emerald-400'
                                 : analysis.matchPercentage >= 50
-                                ? 'text-indigo-600'
-                                : 'text-amber-500'
+                                ? 'text-indigo-600 dark:text-indigo-400'
+                                : 'text-amber-500 dark:text-amber-400'
                             }`}
                           >
                             {analysis.matchPercentage}%
                           </span>
-                          <span className="text-xs font-bold text-slate-400">/ 100</span>
-                          <span className="text-xs text-slate-600 font-medium ml-1">
+                          <span className="text-xs font-bold text-slate-400 dark:text-slate-500">/ 100</span>
+                          <span className="text-xs text-slate-600 dark:text-slate-400 font-medium ml-1">
                             {analysis.matchPercentage >= 75
                               ? 'Strong qualification overlap'
                               : analysis.matchPercentage >= 50
@@ -316,13 +316,13 @@ export const MatcherPage: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                      <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
                         <Target className="w-6 h-6" />
                       </div>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
                           analysis.matchPercentage >= 75
@@ -337,21 +337,21 @@ export const MatcherPage: React.FC = () => {
                   </div>
 
                   {/* Matched Keywords (Green) */}
-                  <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-3">
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                           Matched Skills in Your Profile
                         </h3>
                       </div>
-                      <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60">
                         {analysis.matchedSkills.length} Verified Matches
                       </span>
                     </div>
 
                     {analysis.matchedSkills.length === 0 ? (
-                      <p className="text-xs text-slate-500 italic">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 italic">
                         No explicit keywords from the job description matched your current skills list.
                       </p>
                     ) : (
@@ -359,35 +359,35 @@ export const MatcherPage: React.FC = () => {
                         {analysis.matchedSkills.map((skill) => (
                           <span
                             key={skill}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-900 border border-emerald-200"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800/60"
                           >
-                            <span className="text-emerald-600 font-bold">✓</span>
+                            <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓</span>
                             <span>{skill}</span>
                           </span>
                         ))}
                       </div>
                     )}
-                    <p className="text-[11px] text-slate-500 pt-1">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 pt-1">
                       These verified skills will be prioritized at the top of your tailored resume.
                     </p>
                   </div>
 
                   {/* Missing Skills / Gaps (Amber) */}
-                  <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-3">
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <AlertTriangle className="w-4 h-4 text-amber-600" />
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
+                        <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                           Identified Skill Gaps
                         </h3>
                       </div>
-                      <span className="text-xs font-bold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                      <span className="text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-2.5 py-0.5 rounded-full border border-amber-200 dark:border-amber-800/60">
                         {analysis.missingSkills.length} Gaps
                       </span>
                     </div>
 
                     {analysis.missingSkills.length === 0 ? (
-                      <p className="text-xs text-emerald-700 font-medium">
+                      <p className="text-xs text-emerald-700 dark:text-emerald-400 font-medium">
                         ✓ Excellent! Your profile covers every primary skill mentioned in this posting.
                       </p>
                     ) : (
@@ -395,40 +395,40 @@ export const MatcherPage: React.FC = () => {
                         {analysis.missingSkills.map((skill) => (
                           <span
                             key={skill}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-amber-50 text-amber-900 border border-amber-200"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 border border-amber-200 dark:border-amber-800/60"
                           >
-                            <span className="text-amber-600 font-bold">!</span>
+                            <span className="text-amber-600 dark:text-amber-400 font-bold">!</span>
                             <span>{skill}</span>
                           </span>
                         ))}
                       </div>
                     )}
-                    <p className="text-[11px] text-slate-500 pt-1">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 pt-1">
                       *Note: If you have experience in any of these skills, add them to your Master Profile. ResumeFit will <strong>never invent or add them automatically</strong>.
                     </p>
                   </div>
 
                   {/* Prioritized Projects Preview */}
                   {analysis.prioritizedProjects.length > 0 && (
-                    <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-3">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
                       <div className="flex items-center gap-2">
-                        <FolderGit2 className="w-4 h-4 text-indigo-600" />
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
+                        <FolderGit2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                           Prioritized Projects (Most Relevant First)
                         </h3>
                       </div>
                       <div className="space-y-2">
                         {analysis.prioritizedProjects.slice(0, 2).map((p, i) => (
-                          <div key={p.id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                          <div key={p.id} className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
                             <div className="flex items-center justify-between">
-                              <span className="font-bold text-slate-900">
+                              <span className="font-bold text-slate-900 dark:text-white">
                                 #{i + 1} {p.name}
                               </span>
-                              <span className="text-[10px] text-slate-500 font-mono">
+                              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                                 {(p.technologies || []).join(', ')}
                               </span>
                             </div>
-                            <p className="text-slate-600 line-clamp-2 mt-1 leading-relaxed">
+                            <p className="text-slate-600 dark:text-slate-300 line-clamp-2 mt-1 leading-relaxed">
                               {p.description}
                             </p>
                           </div>

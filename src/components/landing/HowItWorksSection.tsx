@@ -34,17 +34,17 @@ export const HowItWorksSection: React.FC = () => {
   ]
 
   return (
-    <section id="how-it-works" className="py-20 lg:py-28 bg-white border-y border-slate-200">
+    <section id="how-it-works" className="py-20 lg:py-28 bg-white dark:bg-slate-950 border-y border-slate-200 dark:border-slate-800 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
             How ResumeFit Works
           </h2>
-          <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             From Generic Profile to Job-Tailored Resume in 4 Simple Steps
           </p>
-          <p className="text-base sm:text-lg text-slate-600">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
             Stop sending the exact same generic resume to 50 different jobs. Tailor your real qualifications to what recruiters and automated filters actually look for.
           </p>
         </div>
@@ -56,26 +56,26 @@ export const HowItWorksSection: React.FC = () => {
             return (
               <div
                 key={item.step}
-                className="relative bg-[#F8FAFC] rounded-2xl p-6 border border-slate-200 flex flex-col justify-between hover:border-indigo-300 transition-all hover:shadow-md group"
+                className="relative bg-[#F8FAFC] dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between hover:border-indigo-300 dark:hover:border-indigo-600 transition-all hover:shadow-md group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-black text-indigo-600/40 font-mono group-hover:text-indigo-600 transition-colors">
+                    <span className="text-2xl font-black text-indigo-600/40 dark:text-indigo-400/40 font-mono group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                       {item.step}
                     </span>
-                    <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-800 flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 group-hover:text-white transition-colors">
                       <IconComponent className="w-5 h-5" />
                     </div>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-200/60 flex items-center gap-1.5 text-xs font-semibold text-indigo-600">
+                <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-slate-800 flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
                   <span>{item.highlight}</span>
                 </div>
               </div>
@@ -84,9 +84,9 @@ export const HowItWorksSection: React.FC = () => {
         </div>
 
         {/* Ethical Rule Notice */}
-        <div className="mt-12 bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-5 flex items-start gap-3.5 max-w-3xl mx-auto">
-          <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-          <div className="text-xs sm:text-sm text-amber-900 leading-relaxed">
+        <div className="mt-12 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 rounded-xl p-4 sm:p-5 flex items-start gap-3.5 max-w-3xl mx-auto">
+          <ShieldAlert className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
+          <div className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
             <span className="font-bold">Our Ethical Engineering Promise:</span> ResumeFit will{' '}
             <strong>never</strong> invent skills, fake company titles, or forge college credentials you do not possess. If a job description asks for Docker and you do not know Docker, ResumeFit highlights it as a missing skill so you can learn it—never lie about it.
           </div>
@@ -95,3 +95,5 @@ export const HowItWorksSection: React.FC = () => {
     </section>
   )
 }
+
+export default HowItWorksSection

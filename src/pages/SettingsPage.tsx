@@ -216,16 +216,16 @@ export const SettingsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] dark:bg-slate-950 transition-colors duration-200">
       <Navbar />
 
       <main className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Account & Data Settings
           </h1>
-          <p className="mt-1 text-sm text-slate-600">
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
             Manage your credentials, active session mode, and export or backup your personal data.
           </p>
         </div>
@@ -235,44 +235,44 @@ export const SettingsPage: React.FC = () => {
           <div
             className={`p-4 rounded-xl border flex items-start gap-3 transition-all ${
               dataMessage.type === 'success'
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                : 'bg-rose-50 border-rose-200 text-rose-800'
+                ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
+                : 'bg-rose-50 dark:bg-rose-950/50 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300'
             }`}
           >
             {dataMessage.type === 'success' ? (
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
             ) : (
-              <AlertTriangle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-rose-600 dark:text-rose-400 flex-shrink-0 mt-0.5" />
             )}
             <div className="text-sm font-medium">{dataMessage.text}</div>
           </div>
         )}
 
         {/* 1. Account Profile Card */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center font-bold text-lg">
+              <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center font-bold text-lg">
                 <UserIcon className="w-6 h-6" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                   {user?.fullName || 'Active User'}
                 </h2>
-                <p className="text-sm text-slate-500">{user?.email || 'No email associated'}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{user?.email || 'No email associated'}</p>
               </div>
             </div>
 
             {/* Mode Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold self-start sm:self-center border shadow-2xs">
               {isDemoMode ? (
-                <span className="flex items-center gap-1.5 text-amber-700 bg-amber-50 border-amber-200">
-                  <HardDrive className="w-3.5 h-3.5 text-amber-600" />
+                <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 px-2 py-0.5 rounded-full">
+                  <HardDrive className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                   Local Demo Mode (Offline)
                 </span>
               ) : (
-                <span className="flex items-center gap-1.5 text-indigo-700 bg-indigo-50 border-indigo-200">
-                  <Cloud className="w-3.5 h-3.5 text-indigo-600" />
+                <span className="flex items-center gap-1.5 text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-850 px-2 py-0.5 rounded-full">
+                  <Cloud className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                   Supabase Cloud Account
                 </span>
               )}
@@ -280,20 +280,20 @@ export const SettingsPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800">
+              <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 User Identifier (UUID)
               </div>
-              <div className="mt-1 flex items-center justify-between font-mono text-xs text-slate-700 break-all">
+              <div className="mt-1 flex items-center justify-between font-mono text-xs text-slate-700 dark:text-slate-300 break-all">
                 <span>{user?.id || 'demo-user'}</span>
                 <button
                   type="button"
                   onClick={handleCopyUserId}
-                  className="ml-2 p-1.5 hover:bg-slate-200 rounded text-slate-500 hover:text-slate-800 transition"
+                  className="ml-2 p-1.5 hover:bg-slate-200 dark:hover:bg-slate-800 rounded text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition"
                   title="Copy User ID"
                 >
                   {copiedId ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                   ) : (
                     <Copy className="w-3.5 h-3.5" />
                   )}
@@ -301,12 +301,12 @@ export const SettingsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800">
+              <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Database & Storage Layer
               </div>
-              <div className="mt-1 flex items-center gap-2 text-xs font-medium text-slate-800">
-                <Database className="w-4 h-4 text-indigo-600 flex-shrink-0" />
+              <div className="mt-1 flex items-center gap-2 text-xs font-medium text-slate-800 dark:text-slate-200">
+                <Database className="w-4 h-4 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
                 <span>
                   {isSupabaseConfigured
                     ? 'Connected to Supabase PostgreSQL (RLS Active)'
@@ -318,12 +318,12 @@ export const SettingsPage: React.FC = () => {
 
           {/* Demo Mode Conversion Prompt */}
           {isDemoMode && (
-            <div className="bg-gradient-to-r from-indigo-50/60 to-purple-50/60 p-4 rounded-xl border border-indigo-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="bg-gradient-to-r from-indigo-50/60 to-purple-50/60 dark:from-indigo-950/30 dark:to-purple-950/30 p-4 rounded-xl border border-indigo-100 dark:border-indigo-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="text-sm font-semibold text-indigo-950">
+                <h3 className="text-sm font-semibold text-indigo-950 dark:text-indigo-200">
                   Want to sync your resumes across all devices?
                 </h3>
-                <p className="text-xs text-indigo-700 mt-0.5">
+                <p className="text-xs text-indigo-700 dark:text-indigo-400 mt-0.5">
                   Create a permanent Supabase account to sync profiles and resumes securely in the cloud.
                 </p>
               </div>
@@ -338,14 +338,14 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* 2. Security & Credentials Card */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
-          <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-            <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center font-bold">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6">
+          <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+            <div className="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 rounded-lg flex items-center justify-center font-bold">
               <Shield className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Security & Authentication</h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Security & Authentication</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Manage your credentials and password recovery.
               </p>
             </div>
@@ -355,26 +355,26 @@ export const SettingsPage: React.FC = () => {
             <div
               className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${
                 resetMessage.type === 'success'
-                  ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                  : 'bg-rose-50 border-rose-200 text-rose-800'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
+                  : 'bg-rose-50 dark:bg-rose-950/50 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300'
               }`}
             >
               {resetMessage.type === 'success' ? (
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
               ) : (
-                <AlertTriangle className="w-4 h-4 text-rose-600 flex-shrink-0" />
+                <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400 flex-shrink-0" />
               )}
               <span>{resetMessage.text}</span>
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800">
             <div>
-              <div className="text-sm font-semibold text-slate-900 flex items-center gap-2">
-                <KeyRound className="w-4 h-4 text-slate-600" />
+              <div className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                <KeyRound className="w-4 h-4 text-slate-600 dark:text-slate-400" />
                 Password Reset
               </div>
-              <p className="text-xs text-slate-500 mt-1 max-w-lg">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-lg">
                 {isDemoMode
                   ? 'In Local Demo Mode, authentication is local and passwordless. You can test the password reset workflow below.'
                   : `Send a secure password recovery link to your registered email address (${user?.email}).`}
@@ -385,7 +385,7 @@ export const SettingsPage: React.FC = () => {
               type="button"
               onClick={handlePasswordReset}
               disabled={isResettingPassword}
-              className="px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold rounded-lg shadow-2xs transition disabled:opacity-50 whitespace-nowrap self-start sm:self-center"
+              className="px-4 py-2 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 text-xs font-semibold rounded-lg shadow-2xs transition disabled:opacity-50 whitespace-nowrap self-start sm:self-center"
             >
               {isResettingPassword ? 'Sending Link...' : 'Send Reset Link'}
             </button>
@@ -393,14 +393,14 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* 3. Data Portability & Backup Card */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
-          <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center font-bold">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6">
+          <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+            <div className="w-10 h-10 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center font-bold">
               <Database className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Data Portability & Backup</h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Data Portability & Backup</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 You own your data. Export your full profile and resumes to JSON, or restore a backup anytime.
               </p>
             </div>
@@ -408,13 +408,13 @@ export const SettingsPage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Export JSON */}
-            <div className="p-4 rounded-xl border border-slate-200 bg-white hover:border-indigo-300 transition flex flex-col justify-between space-y-3">
+            <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:border-indigo-300 dark:hover:border-indigo-600 transition flex flex-col justify-between space-y-3">
               <div>
-                <div className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <Download className="w-4 h-4 text-indigo-600" />
+                <div className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Download className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                   Export Data (JSON)
                 </div>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Download a complete JSON backup containing your Master Profile and all saved resumes.
                 </p>
               </div>
@@ -423,7 +423,7 @@ export const SettingsPage: React.FC = () => {
                 type="button"
                 onClick={handleExportBackup}
                 disabled={isExporting}
-                className="w-full py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg border border-indigo-200 transition flex items-center justify-center gap-2"
+                className="w-full py-2 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-xs font-semibold rounded-lg border border-indigo-200 dark:border-indigo-800 transition flex items-center justify-center gap-2"
               >
                 <Download className="w-3.5 h-3.5" />
                 {isExporting ? 'Exporting...' : 'Export JSON Backup'}
@@ -431,18 +431,18 @@ export const SettingsPage: React.FC = () => {
             </div>
 
             {/* Import JSON */}
-            <div className="p-4 rounded-xl border border-slate-200 bg-white hover:border-indigo-300 transition flex flex-col justify-between space-y-3">
+            <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 hover:border-indigo-300 dark:hover:border-indigo-600 transition flex flex-col justify-between space-y-3">
               <div>
-                <div className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <Upload className="w-4 h-4 text-emerald-600" />
+                <div className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Upload className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   Restore Backup (JSON)
                 </div>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Upload a previously exported ResumeFit JSON file to restore your qualifications.
                 </p>
               </div>
 
-              <label className="w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-lg border border-emerald-200 transition flex items-center justify-center gap-2 cursor-pointer">
+              <label className="w-full py-2 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-lg border border-emerald-200 dark:border-emerald-800 transition flex items-center justify-center gap-2 cursor-pointer">
                 <Upload className="w-3.5 h-3.5" />
                 <span>Upload Backup File</span>
                 <input
@@ -456,11 +456,11 @@ export const SettingsPage: React.FC = () => {
           </div>
 
           {/* Secondary Data Actions */}
-          <div className="pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
             <button
               type="button"
               onClick={handleRestoreSampleData}
-              className="text-slate-600 hover:text-indigo-600 flex items-center gap-1.5 font-medium transition"
+              className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1.5 font-medium transition"
             >
               <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
               Reset Master Profile to Sample Qualifications
@@ -469,7 +469,7 @@ export const SettingsPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setConfirmClearOpen(true)}
-              className="text-rose-600 hover:text-rose-700 flex items-center gap-1.5 font-medium transition"
+              className="text-rose-600 dark:text-rose-400 hover:text-rose-700 flex items-center gap-1.5 font-medium transition"
             >
               <Trash2 className="w-3.5 h-3.5 text-rose-500" />
               Clear Local Data Cache
@@ -478,28 +478,28 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* 4. Session Controls Card */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
-          <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-            <div className="w-10 h-10 bg-slate-100 text-slate-700 rounded-lg flex items-center justify-center font-bold">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6">
+          <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
+            <div className="w-10 h-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg flex items-center justify-center font-bold">
               <LogOut className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Session & Sign Out</h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Session & Sign Out</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Safely end your current session or switch operating modes.
               </p>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-slate-500 dark:text-slate-400">
               {isDemoMode ? (
                 <span>
                   Currently in Local Demo Mode. Signing out will return you to the public landing page.
                 </span>
               ) : (
                 <span>
-                  Signed in as <strong className="text-slate-800">{user?.email}</strong>.
+                  Signed in as <strong className="text-slate-800 dark:text-slate-200">{user?.email}</strong>.
                 </span>
               )}
             </div>
@@ -509,7 +509,7 @@ export const SettingsPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => signInAsDemoUser()}
-                  className="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition"
+                  className="px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 rounded-lg transition"
                 >
                   Switch to Demo Mode
                 </button>
@@ -533,14 +533,14 @@ export const SettingsPage: React.FC = () => {
 
       {/* Confirmation Modal for Clearing Cache */}
       {confirmClearOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-2xs p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4 animate-in fade-in zoom-in-95 duration-150">
-            <div className="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-2xs p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 dark:border-slate-800 space-y-4 animate-in fade-in zoom-in-95 duration-150">
+            <div className="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">
               <AlertTriangle className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900">Clear Local Device Cache?</h3>
-              <p className="text-xs text-slate-600 mt-1">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Clear Local Device Cache?</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                 This will clear locally stored profile and resume cache for user{' '}
                 <span className="font-mono font-medium">{user?.id}</span>. If you are in Local Demo Mode without a cloud account or JSON backup, unsaved changes will be lost.
               </p>
@@ -549,7 +549,7 @@ export const SettingsPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setConfirmClearOpen(false)}
-                className="px-4 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition"
+                className="px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 rounded-lg transition"
               >
                 Cancel
               </button>

@@ -28,13 +28,13 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
   }
 
   return (
-    <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
-      <div className="border-b border-slate-100 pb-4">
-        <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-          <Globe className="w-5 h-5 text-indigo-600" />
+    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6">
+      <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <Globe className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
           <span>Professional Social Links</span>
         </h2>
-        <p className="text-xs text-slate-500 mt-1">
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
           Links to your GitHub profile, LinkedIn network, personal portfolio, or code repositories.
         </p>
       </div>
@@ -43,7 +43,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
         {/* LinkedIn */}
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               LinkedIn Profile URL
             </label>
             {data.linkedinUrl && (
@@ -51,7 +51,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
                 href={data.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-indigo-600 hover:underline flex items-center gap-0.5"
+                className="text-[11px] text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
               >
                 <span>Test Link</span>
                 <ExternalLink className="w-3 h-3" />
@@ -59,15 +59,15 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
             )}
           </div>
           <div className="relative">
-            <div className="absolute left-3.5 top-3 text-slate-400">
-              <LinkedInIcon className="w-4 h-4 text-slate-400" />
+            <div className="absolute left-3.5 top-3 text-slate-400 dark:text-slate-500">
+              <LinkedInIcon className="w-4 h-4 text-slate-400 dark:text-slate-500" />
             </div>
             <input
               type="url"
               value={data.linkedinUrl || ''}
               onChange={(e) => handleChange('linkedinUrl', e.target.value)}
               placeholder="https://linkedin.com/in/username"
-              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 rounded-xl bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
             />
           </div>
         </div>
@@ -75,7 +75,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
         {/* GitHub */}
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               GitHub Profile URL
             </label>
             {data.githubUrl && (
@@ -83,7 +83,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
                 href={data.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-indigo-600 hover:underline flex items-center gap-0.5"
+                className="text-[11px] text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
               >
                 <span>Test Link</span>
                 <ExternalLink className="w-3 h-3" />
@@ -91,15 +91,15 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
             )}
           </div>
           <div className="relative">
-            <div className="absolute left-3.5 top-3 text-slate-400">
-              <GitHubIcon className="w-4 h-4 text-slate-400" />
+            <div className="absolute left-3.5 top-3 text-slate-400 dark:text-slate-500">
+              <GitHubIcon className="w-4 h-4 text-slate-400 dark:text-slate-500" />
             </div>
             <input
               type="url"
               value={data.githubUrl || ''}
               onChange={(e) => handleChange('githubUrl', e.target.value)}
               placeholder="https://github.com/username"
-              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 rounded-xl bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
             />
           </div>
         </div>
@@ -107,7 +107,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
         {/* Portfolio */}
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Portfolio Website URL
             </label>
             {data.portfolioUrl && (
@@ -115,7 +115,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
                 href={data.portfolioUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-indigo-600 hover:underline flex items-center gap-0.5"
+                className="text-[11px] text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
               >
                 <span>Test Link</span>
                 <ExternalLink className="w-3 h-3" />
@@ -123,13 +123,13 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
             )}
           </div>
           <div className="relative">
-            <Globe className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+            <Globe className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-3" />
             <input
               type="url"
               value={data.portfolioUrl || ''}
               onChange={(e) => handleChange('portfolioUrl', e.target.value)}
               placeholder="https://yourname.dev"
-              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 rounded-xl bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
             />
           </div>
         </div>
@@ -137,7 +137,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
         {/* Other / LeetCode / Kaggle / Tech Blog */}
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Other Link (Blog, LeetCode, Twitter)
             </label>
             {data.otherUrl && (
@@ -145,7 +145,7 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
                 href={data.otherUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-indigo-600 hover:underline flex items-center gap-0.5"
+                className="text-[11px] text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-0.5"
               >
                 <span>Test Link</span>
                 <ExternalLink className="w-3 h-3" />
@@ -153,13 +153,13 @@ export const SocialLinksSection: React.FC<Props> = ({ data, onChange }) => {
             )}
           </div>
           <div className="relative">
-            <Link2 className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+            <Link2 className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-3" />
             <input
               type="url"
               value={data.otherUrl || ''}
               onChange={(e) => handleChange('otherUrl', e.target.value)}
               placeholder="https://leetcode.com/u/username or blog"
-              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 rounded-xl bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full pl-10 pr-3.5 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
             />
           </div>
         </div>

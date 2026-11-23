@@ -45,24 +45,24 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-5">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-xs space-y-5">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <Sliders className="w-4 h-4 text-indigo-600" />
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+          <Sliders className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
             Layout & Typography Controls
           </h3>
         </div>
-        <span className="text-[11px] text-slate-400">Reorder & Hide Sections</span>
+        <span className="text-[11px] text-slate-400 dark:text-slate-500">Reorder & Hide Sections</span>
       </div>
 
       {/* Typography & Spacing Toolbar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
         {/* Font Family */}
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1 flex items-center gap-1">
-            <Type className="w-3 h-3 text-slate-400" />
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 flex items-center gap-1">
+            <Type className="w-3 h-3 text-slate-400 dark:text-slate-500" />
             <span>Font Style</span>
           </label>
           <select
@@ -70,7 +70,7 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
             onChange={(e) =>
               onChange({ ...settings, fontFamily: e.target.value as 'sans' | 'serif' | 'mono' })
             }
-            className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white text-slate-800 font-medium"
+            className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-medium"
           >
             <option value="sans">Modern Sans (Clean)</option>
             <option value="serif">Classic Serif (Formal)</option>
@@ -80,7 +80,7 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
 
         {/* Font Size */}
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
             Font Scale
           </label>
           <select
@@ -88,7 +88,7 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
             onChange={(e) =>
               onChange({ ...settings, fontSize: e.target.value as 'small' | 'normal' | 'large' })
             }
-            className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white text-slate-800 font-medium"
+            className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-medium"
           >
             <option value="small">Compact (Fit more content)</option>
             <option value="normal">Standard (Balanced)</option>
@@ -98,7 +98,7 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
 
         {/* Section Spacing */}
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
             Line Spacing
           </label>
           <select
@@ -106,7 +106,7 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
             onChange={(e) =>
               onChange({ ...settings, spacing: e.target.value as 'compact' | 'normal' | 'relaxed' })
             }
-            className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white text-slate-800 font-medium"
+            className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-medium"
           >
             <option value="compact">Tight (Single Page)</option>
             <option value="normal">Normal</option>
@@ -117,8 +117,8 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
 
       {/* Section Reorder & Visibility List */}
       <div className="space-y-2">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1">
-          <Move className="w-3 h-3 text-slate-400" />
+        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1">
+          <Move className="w-3 h-3 text-slate-400 dark:text-slate-500" />
           <span>Section Order on Output Resume</span>
         </span>
 
@@ -133,15 +133,15 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
                 key={key}
                 className={`flex items-center justify-between p-2.5 rounded-xl border transition-colors ${
                   isVisible
-                    ? 'bg-white border-slate-200'
-                    : 'bg-slate-50 border-dashed border-slate-200 opacity-60'
+                    ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+                    : 'bg-slate-50 dark:bg-slate-900/40 border-dashed border-slate-200 dark:border-slate-800 opacity-60'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold text-slate-400 w-4">
+                  <span className="text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500 w-4">
                     {idx + 1}.
                   </span>
-                  <span className={`text-xs font-semibold ${isVisible ? 'text-slate-800' : 'text-slate-400 line-through'}`}>
+                  <span className={`text-xs font-semibold ${isVisible ? 'text-slate-800 dark:text-slate-200' : 'text-slate-400 dark:text-slate-600 line-through'}`}>
                     {SECTION_LABELS[key]}
                   </span>
                 </div>
@@ -153,12 +153,12 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
                     onClick={() => handleToggle(key)}
                     className={`p-1 rounded-md text-xs transition-colors ${
                       isVisible
-                        ? 'text-slate-600 hover:text-indigo-600 hover:bg-slate-100'
-                        : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200'
+                        ? 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        : 'text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                     }`}
                     title={isVisible ? 'Hide this section' : 'Show this section'}
                   >
-                    {isVisible ? <Eye className="w-3.5 h-3.5 text-indigo-600" /> : <EyeOff className="w-3.5 h-3.5" />}
+                    {isVisible ? <Eye className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" /> : <EyeOff className="w-3.5 h-3.5" />}
                   </button>
 
                   {/* Move Up */}
@@ -166,7 +166,7 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
                     type="button"
                     disabled={isFirst}
                     onClick={() => handleMove(idx, 'up')}
-                    className="p-1 rounded-md text-slate-400 hover:text-slate-800 hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent"
+                    className="p-1 rounded-md text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent"
                     title="Move up"
                   >
                     <ArrowUp className="w-3.5 h-3.5" />
@@ -177,7 +177,7 @@ export const SectionManager: React.FC<Props> = ({ settings, onChange }) => {
                     type="button"
                     disabled={isLast}
                     onClick={() => handleMove(idx, 'down')}
-                    className="p-1 rounded-md text-slate-400 hover:text-slate-800 hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent"
+                    className="p-1 rounded-md text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent"
                     title="Move down"
                   >
                     <ArrowDown className="w-3.5 h-3.5" />

@@ -61,28 +61,28 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
   const toolSkills = skills.filter((s) => s.category === 'tools')
 
   return (
-    <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-6">
-      <div className="border-b border-slate-100 pb-4">
-        <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-          <Wrench className="w-5 h-5 text-indigo-600" />
+    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6">
+      <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <Wrench className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
           <span>Skills & Competencies</span>
         </h2>
-        <p className="text-xs text-slate-500 mt-1">
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
           Add your genuine technical skills, tools, and soft skills. ATS algorithms match job keywords directly against these.
         </p>
       </div>
 
       {/* Add Skill Form */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-slate-200 space-y-3">
+      <div className="p-4 sm:p-5 rounded-2xl bg-[#F8FAFC] dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
             Add New Skill
           </span>
-          <span className="text-[11px] text-slate-500">Total: {skills.length} skills listed</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">Total: {skills.length} skills listed</span>
         </div>
 
         {errorMsg && (
-          <div className="p-2 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700">
+          <div className="p-2 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60 text-xs text-rose-700 dark:text-rose-300">
             {errorMsg}
           </div>
         )}
@@ -103,7 +103,7 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
                 }
               }}
               placeholder="e.g. React.js, Python, PostgreSQL..."
-              className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3.5 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-sm bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
@@ -111,7 +111,7 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as 'technical' | 'soft' | 'tools')}
-              className="w-full px-3 py-2.5 border border-slate-200 rounded-xl text-xs sm:text-sm bg-white"
+              className="w-full px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="technical">Technical Skill</option>
               <option value="tools">Tool & Platform</option>
@@ -123,7 +123,7 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
             <select
               value={level}
               onChange={(e) => setLevel(e.target.value as 'beginner' | 'intermediate' | 'advanced')}
-              className="w-full px-3 py-2.5 border border-slate-200 rounded-xl text-xs sm:text-sm bg-white"
+              className="w-full px-3 py-2.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>
@@ -141,9 +141,9 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
         </div>
 
         {/* Quick Suggestions */}
-        <div className="pt-2 border-t border-slate-200/60">
-          <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1 mb-2">
-            <Sparkles className="w-3 h-3 text-indigo-600" />
+        <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-2">
+            <Sparkles className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
             <span>Popular Suggestions (Click to add if applicable):</span>
           </span>
           <div className="flex flex-wrap gap-1.5">
@@ -152,7 +152,7 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
                 key={item.name}
                 type="button"
                 onClick={() => handleAddSkill(item.name, item.category)}
-                className="px-2.5 py-1 rounded-lg text-xs font-medium bg-white border border-slate-200 text-slate-700 hover:border-indigo-400 hover:text-indigo-600 transition-colors shadow-xs"
+                className="px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors shadow-xs"
               >
                 + {item.name}
               </button>
@@ -165,27 +165,27 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
       <div className="space-y-5">
         {/* Technical */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 mb-2 flex items-center gap-2">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
             <span>Technical Skills</span>
-            <span className="px-1.5 py-0.5 rounded text-[10px] bg-indigo-50 text-indigo-700 border border-indigo-200">
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/80">
               {technicalSkills.length}
             </span>
           </h3>
           {technicalSkills.length === 0 ? (
-            <p className="text-xs text-slate-400 italic">No technical skills added yet.</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No technical skills added yet.</p>
           ) : (
             <div className="flex flex-wrap gap-2">
               {technicalSkills.map((s) => (
                 <span
                   key={s.id}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-indigo-50 text-indigo-900 border border-indigo-200 shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-indigo-50 dark:bg-indigo-950/60 text-indigo-900 dark:text-indigo-200 border border-indigo-200 dark:border-indigo-800/80 shadow-2xs"
                 >
                   <span className="font-semibold">{s.name}</span>
-                  <span className="text-[10px] text-indigo-500">({s.level})</span>
+                  <span className="text-[10px] text-indigo-500 dark:text-indigo-400">({s.level})</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveSkill(s.id)}
-                    className="text-indigo-400 hover:text-rose-600 transition-colors ml-0.5"
+                    className="text-indigo-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors ml-0.5"
                     title={`Remove ${s.name}`}
                   >
                     <X className="w-3.5 h-3.5" />
@@ -198,27 +198,27 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
 
         {/* Tools */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 mb-2 flex items-center gap-2">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
             <span>Tools, Frameworks & Platforms</span>
-            <span className="px-1.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-700 border border-slate-200">
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
               {toolSkills.length}
             </span>
           </h3>
           {toolSkills.length === 0 ? (
-            <p className="text-xs text-slate-400 italic">No tools or platforms added yet.</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No tools or platforms added yet.</p>
           ) : (
             <div className="flex flex-wrap gap-2">
               {toolSkills.map((s) => (
                 <span
                   key={s.id}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200 shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-2xs"
                 >
                   <span className="font-semibold">{s.name}</span>
-                  <span className="text-[10px] text-slate-500">({s.level})</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400">({s.level})</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveSkill(s.id)}
-                    className="text-slate-400 hover:text-rose-600 transition-colors ml-0.5"
+                    className="text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors ml-0.5"
                     title={`Remove ${s.name}`}
                   >
                     <X className="w-3.5 h-3.5" />
@@ -231,26 +231,26 @@ export const SkillsSection: React.FC<Props> = ({ skills, onChange }) => {
 
         {/* Soft Skills */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 mb-2 flex items-center gap-2">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
             <span>Soft Skills & Practices</span>
-            <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200">
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
               {softSkills.length}
             </span>
           </h3>
           {softSkills.length === 0 ? (
-            <p className="text-xs text-slate-400 italic">No soft skills added yet.</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No soft skills added yet.</p>
           ) : (
             <div className="flex flex-wrap gap-2">
               {softSkills.map((s) => (
                 <span
                   key={s.id}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-emerald-50 text-emerald-900 border border-emerald-200 shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800/60 shadow-2xs"
                 >
                   <span className="font-semibold">{s.name}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveSkill(s.id)}
-                    className="text-emerald-500 hover:text-rose-600 transition-colors ml-0.5"
+                    className="text-emerald-500 hover:text-rose-600 dark:hover:text-rose-400 transition-colors ml-0.5"
                     title={`Remove ${s.name}`}
                   >
                     <X className="w-3.5 h-3.5" />

@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { ThemeProvider } from './context/ThemeContext'
 import { ProtectedRoute } from './components/common/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
 
@@ -64,9 +65,10 @@ export const App: React.FC = () => {
     <BrowserRouter>
       <ScrollToTop />
       <AndroidBackHandler />
-      <AuthProvider>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
+      <ThemeProvider>
+        <AuthProvider>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
             {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -135,6 +137,7 @@ export const App: React.FC = () => {
           </Routes>
         </Suspense>
       </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

@@ -128,16 +128,16 @@ export const PreviewPage: React.FC = () => {
   const handleZoomReset = () => setZoom(100)
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
       {/* Top Floating Control Toolbar (STRICTLY HIDDEN DURING PRINTING) */}
-      <header className="no-print sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+      <header className="no-print sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-between gap-3 py-3">
             {/* Left: Navigation & Resume Switcher */}
             <div className="flex items-center gap-3">
               <Link
                 to="/dashboard"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-indigo-600 hover:bg-slate-50 border border-slate-200 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
                 title="Back to Dashboard"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -149,7 +149,7 @@ export const PreviewPage: React.FC = () => {
                   <select
                     value={selectedResumeId}
                     onChange={(e) => handleSelectResume(e.target.value)}
-                    className="text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-xl px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-2xs max-w-[180px] sm:max-w-[240px] truncate"
+                    className="text-xs font-semibold text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-2xs max-w-[180px] sm:max-w-[240px] truncate"
                   >
                     {resumes.map((r) => (
                       <option key={r.id} value={r.id}>
@@ -164,14 +164,14 @@ export const PreviewPage: React.FC = () => {
             {/* Center: Formatting & Zoom Controls */}
             <div className="flex items-center gap-2">
               {/* Template Switcher */}
-              <div className="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+              <div className="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
                 <button
                   type="button"
                   onClick={() => setTemplateIdOverride('ats-modern')}
                   className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
                     activeResume.templateId === 'ats-modern'
-                      ? 'bg-white text-indigo-700 shadow-2xs font-semibold'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-400 shadow-2xs font-semibold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   Modern
@@ -181,8 +181,8 @@ export const PreviewPage: React.FC = () => {
                   onClick={() => setTemplateIdOverride('ats-classic')}
                   className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
                     activeResume.templateId === 'ats-classic'
-                      ? 'bg-white text-indigo-700 shadow-2xs font-semibold'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-400 shadow-2xs font-semibold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   Classic
@@ -192,8 +192,8 @@ export const PreviewPage: React.FC = () => {
                   onClick={() => setTemplateIdOverride('ats-compact')}
                   className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
                     activeResume.templateId === 'ats-compact'
-                      ? 'bg-white text-indigo-700 shadow-2xs font-semibold'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-400 shadow-2xs font-semibold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   Compact
@@ -201,14 +201,14 @@ export const PreviewPage: React.FC = () => {
               </div>
 
               {/* Paper Size Selector (A4 vs Letter) */}
-              <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+              <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
                 <button
                   type="button"
                   onClick={() => setPaperSize('a4')}
                   className={`px-2.5 py-1 rounded-lg transition-colors ${
                     paperSize === 'a4'
-                      ? 'bg-white text-slate-900 font-bold shadow-2xs'
-                      : 'text-slate-500 hover:text-slate-800'
+                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-bold shadow-2xs'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                   }`}
                   title="A4 Paper (210 x 297 mm)"
                 >
@@ -219,8 +219,8 @@ export const PreviewPage: React.FC = () => {
                   onClick={() => setPaperSize('letter')}
                   className={`px-2.5 py-1 rounded-lg transition-colors ${
                     paperSize === 'letter'
-                      ? 'bg-white text-slate-900 font-bold shadow-2xs'
-                      : 'text-slate-500 hover:text-slate-800'
+                      ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-bold shadow-2xs'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                   }`}
                   title="US Letter Paper (8.5 x 11 in)"
                 >
@@ -229,12 +229,12 @@ export const PreviewPage: React.FC = () => {
               </div>
 
               {/* Zoom Controls */}
-              <div className="hidden sm:flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+              <div className="hidden sm:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
                 <button
                   type="button"
                   onClick={handleZoomOut}
                   disabled={zoom <= 50}
-                  className="p-1 text-slate-600 hover:text-slate-900 disabled:opacity-40"
+                  className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 disabled:opacity-40"
                   title="Zoom Out"
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
@@ -242,7 +242,7 @@ export const PreviewPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleZoomReset}
-                  className="px-1.5 text-[11px] font-mono font-semibold text-slate-700"
+                  className="px-1.5 text-[11px] font-mono font-semibold text-slate-700 dark:text-slate-300"
                   title="Reset to 100%"
                 >
                   {zoom}%
@@ -251,7 +251,7 @@ export const PreviewPage: React.FC = () => {
                   type="button"
                   onClick={handleZoomIn}
                   disabled={zoom >= 150}
-                  className="p-1 text-slate-600 hover:text-slate-900 disabled:opacity-40"
+                  className="p-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 disabled:opacity-40"
                   title="Zoom In"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
@@ -263,19 +263,19 @@ export const PreviewPage: React.FC = () => {
             <div className="flex items-center gap-2">
               <Link
                 to={`/ats-checker?id=${activeResume.id}`}
-                className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors"
+                className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 shadow-2xs transition-colors"
                 title="Audit ATS Compatibility Score"
               >
-                <Gauge className="w-3.5 h-3.5 text-indigo-600" />
+                <Gauge className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                 <span>Score: {activeResume.atsScore || 90}%</span>
               </Link>
 
               <Link
                 to={`/builder?id=${activeResume.id}`}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 shadow-2xs transition-colors"
                 title="Edit Resume Details in Builder"
               >
-                <Edit3 className="w-3.5 h-3.5 text-slate-500" />
+                <Edit3 className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                 <span>Edit</span>
               </Link>
 
@@ -284,17 +284,17 @@ export const PreviewPage: React.FC = () => {
                 type="button"
                 onClick={handleDirectDownload}
                 disabled={isExportingDirect}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs transition-colors disabled:opacity-50"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 shadow-2xs transition-colors disabled:opacity-50"
                 title="Direct PDF download or mobile device share"
               >
                 {isExportingDirect ? (
                   <>
-                    <div className="w-3.5 h-3.5 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-3.5 h-3.5 border-2 border-indigo-600 dark:border-indigo-400 border-t-transparent rounded-full animate-spin" />
                     <span className="hidden sm:inline">Exporting...</span>
                   </>
                 ) : (
                   <>
-                    <Share2 className="w-3.5 h-3.5 text-slate-600" />
+                    <Share2 className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                     <span className="hidden sm:inline">Direct PDF</span>
                   </>
                 )}
@@ -304,7 +304,7 @@ export const PreviewPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handlePrintExport}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-200 transition-all active:scale-[0.98]"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-200 dark:shadow-none transition-all active:scale-[0.98]"
                 title="Download 100% Vector Text ATS-Compliant PDF"
               >
                 <Printer className="w-4 h-4" />
@@ -316,8 +316,8 @@ export const PreviewPage: React.FC = () => {
 
         {/* Success Notification */}
         {exportSuccess && (
-          <div className="bg-emerald-50 border-t border-emerald-200 px-4 py-2 text-center text-xs font-semibold text-emerald-800 flex items-center justify-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+          <div className="bg-emerald-50 dark:bg-emerald-950/60 border-t border-emerald-200 dark:border-emerald-800 px-4 py-2 text-center text-xs font-semibold text-emerald-800 dark:text-emerald-300 flex items-center justify-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>PDF file generated and ready. Selectable vector text format applied!</span>
           </div>
         )}
@@ -326,25 +326,25 @@ export const PreviewPage: React.FC = () => {
       {/* Main Preview Container */}
       <main className="flex-grow py-8 sm:py-12 px-2 sm:px-6 flex flex-col items-center justify-start overflow-auto">
         {loading ? (
-          <div className="bg-white rounded-2xl p-16 border border-slate-200 text-center space-y-3 mt-12 shadow-xs">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-16 border border-slate-200 dark:border-slate-800 text-center space-y-3 mt-12 shadow-xs">
             <div className="w-8 h-8 border-3 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto" />
-            <p className="text-xs text-slate-500 font-medium">Preparing document preview...</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Preparing document preview...</p>
           </div>
         ) : (
           <div className="w-full flex flex-col items-center">
             {/* Context Badge (Hidden in print) */}
-            <div className="no-print mb-4 flex items-center gap-2 text-xs text-slate-500">
-              <span className="inline-flex items-center gap-1 font-semibold text-slate-700">
-                <FileText className="w-3.5 h-3.5 text-indigo-600" />
+            <div className="no-print mb-4 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
+                <FileText className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                 <span>{activeResume.title}</span>
               </span>
               <span>•</span>
-              <span className="font-mono uppercase bg-slate-200/80 px-2 py-0.5 rounded text-[10px] text-slate-700 font-bold">
+              <span className="font-mono uppercase bg-slate-200/80 dark:bg-slate-800 px-2 py-0.5 rounded text-[10px] text-slate-700 dark:text-slate-300 font-bold">
                 {paperSize.toUpperCase()} FORMAT
               </span>
               <span>•</span>
-              <span className="text-emerald-700 font-medium flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="text-emerald-700 dark:text-emerald-400 font-medium flex items-center gap-1">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>100% Selectable ATS Vector Text</span>
               </span>
             </div>
@@ -358,7 +358,7 @@ export const PreviewPage: React.FC = () => {
               }}
             >
               <div
-                className={`w-full bg-white shadow-xl rounded-sm border border-slate-200 transition-all ${
+                className={`w-full bg-white shadow-xl rounded-sm border border-slate-200 dark:border-slate-700 transition-all ${
                   paperSize === 'letter' ? 'max-w-[816px]' : 'max-w-[794px]'
                 }`}
               >

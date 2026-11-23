@@ -17,8 +17,23 @@
     <meta name="application-name" content="ResumeFit" />
 
     <title>ResumeFit - Job-Specific ATS Resume Builder</title>
+
+    <!-- Zero-Flash Theme Script -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('resumefit_theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-[#F8FAFC] text-slate-900 antialiased">
+  <body class="bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

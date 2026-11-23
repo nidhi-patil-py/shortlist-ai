@@ -43,3 +43,46 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* Print and PDF generation styles */
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide navigation, banner, toolbars, buttons */
+  header, footer, nav, .no-print, [role="banner"], [role="navigation"], .demo-banner {
+    display: none !important;
+  }
+
+  /* Resume paper fills the print page seamlessly */
+  .resume-paper {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+  }
+
+  /* Prevent page-break cuts inside item blocks */
+  .resume-item-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .resume-section-header {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm;
+  }
+}

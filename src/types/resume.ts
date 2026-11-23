@@ -87,7 +87,17 @@ export interface ATSMatchResult {
   }
 }
 
-export type ResumeTemplateId = 'ats-classic' | 'ats-modern' | 'ats-executive'
+export type ResumeTemplateId = 'ats-classic' | 'ats-modern' | 'ats-compact' | 'ats-executive'
+
+export type ResumeSectionKey = 'summary' | 'experience' | 'projects' | 'education' | 'skills' | 'certifications'
+
+export interface ResumeSettings {
+  sectionOrder: ResumeSectionKey[]
+  sectionVisibility: Record<ResumeSectionKey, boolean>
+  fontFamily: 'sans' | 'serif' | 'mono'
+  fontSize: 'small' | 'normal' | 'large'
+  spacing: 'compact' | 'normal' | 'relaxed'
+}
 
 export interface ResumeData {
   id: string
@@ -96,6 +106,7 @@ export interface ResumeData {
   targetJobTitle?: string
   jobDescription?: string
   templateId: ResumeTemplateId
+  settings?: ResumeSettings
   personal: PersonalDetails
   education: EducationItem[]
   skills: SkillItem[]

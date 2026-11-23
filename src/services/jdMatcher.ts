@@ -83,8 +83,10 @@ export function extractCanonicalKeywords(text: string): {
     return { technical: [], tools: [], soft: [], allCanonicals: [] }
   }
 
-  // Preprocess text: lower case, normalize punctuation
-  const cleanText = text.toLowerCase()
+  // Preprocess text: lower case, normalize punctuation while preserving mid-word dots like 'node.js'
+  const cleanText = text
+    .toLowerCase()
+    .replace(/\.(?=\s|$|[,()/;:!?"'])/g, ' ')
 
   const detectedMap = new Map<string, CanonicalSkill>()
 

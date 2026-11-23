@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { FileText, Menu, X, ArrowRight } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { FileText, Menu, X, ArrowRight, LogOut, LayoutDashboard } from 'lucide-react'
+import { useAuth } from '../../context/useAuth'
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, signOut, isDemoMode } = useAuth()
 
   const navLinks = [
     { name: 'How It Works', href: '/#how-it-works' },
@@ -14,6 +17,11 @@ export const Navbar: React.FC = () => {
   ]
 
   const isHome = location.pathname === '/'
+
+  const handleSignOut = async () => {
+    await signOut()
+    navigate('/')
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-[#F8FAFC]/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
@@ -27,9 +35,15 @@ export const Navbar: React.FC = () => {
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-1.5">
                 Resume<span className="text-indigo-600">Fit</span>
-                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
-                  ATS Ready
-                </span>
+                {isDemoMode ? (
+                  <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">
+                    DEMO MODE
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    ATS Ready
+                  </span>
+                )}
               </span>
               <span className="text-[10px] text-slate-500 font-medium -mt-1 hidden sm:inline">
                 Job-Specific Resume Engine
@@ -62,29 +76,67 @@ export const Navbar: React.FC = () => {
 
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              to="/login"
-              className="text-sm font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 rounded-lg transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/signup"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-300 hover:shadow-indigo-400 transition-all active:scale-[0.98]"
-            >
-              <span>Start Free</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-3">
+                <Link
+                  to="/dashboard"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 rounded-lg transition-colors"
+                >
+                  <LayoutDashboard className="w-4 h-4 text-indigo-600" />
+                  <span>Dashboard</span>
+                </Link>
+                <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
+                  <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold uppercase">
+                    {user.fullName ? user.fullName.charAt(0) : user.email.charAt(0)}
+                  </div>
+                  <span className="text-xs font-medium text-slate-700 max-w-[120px] truncate">
+                    {user.fullName || user.email}
+                  </span>
+                  <button
+                    onClick={handleSignOut}
+                    title="Sign Out"
+                    className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-slate-100 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-sm font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 rounded-lg transition-colors"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-300 hover:shadow-indigo-400 transition-all active:scale-[0.98]"
+                >
+                  <span>Start Free</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-2 md:hidden">
-            <Link
-              to="/signup"
-              className="text-xs font-semibold px-3 py-1.5 rounded-lg text-white bg-indigo-600"
-            >
-              Start Free
-            </Link>
+            {user ? (
+              <Link
+                to="/dashboard"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg text-white bg-indigo-600"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                to="/signup"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg text-white bg-indigo-600"
+              >
+                Start Free
+              </Link>
+            )}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -113,20 +165,46 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <Link
-              to="/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 px-4 text-sm font-semibold text-slate-700 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/signup"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 px-4 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 shadow-sm transition-colors"
-            >
-              Create Account Free
-            </Link>
+            {user ? (
+              <>
+                <div className="px-3 py-2 text-xs text-slate-500 font-medium">
+                  Signed in as <strong className="text-slate-900">{user.email}</strong>
+                </div>
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-sm"
+                >
+                  Open Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    handleSignOut()
+                  }}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-slate-700 rounded-lg border border-slate-200 hover:bg-slate-50"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-slate-700 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 shadow-sm transition-colors"
+                >
+                  Create Account Free
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

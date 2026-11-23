@@ -1,5 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import { ProtectedRoute } from './components/common/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
 
 // Code-splitting via React.lazy for sub-routes to keep initial bundle size minimal
@@ -27,21 +29,77 @@ const PageLoader: React.FC = () => (
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/builder" element={<BuilderPage />} />
-          <Route path="/matcher" element={<MatcherPage />} />
-          <Route path="/ats-checker" element={<AtsCheckerPage />} />
-          <Route path="/preview" element={<PreviewPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
+      <AuthProvider>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+
+            {/* Protected Routes */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/builder"
+              element={
+                <ProtectedRoute>
+                  <BuilderPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/matcher"
+              element={
+                <ProtectedRoute>
+                  <MatcherPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ats-checker"
+              element={
+                <ProtectedRoute>
+                  <AtsCheckerPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/preview"
+              element={
+                <ProtectedRoute>
+                  <PreviewPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <SettingsPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* 404 Route */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

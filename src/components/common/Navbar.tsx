@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { FileText, Menu, X, ArrowRight, LogOut, LayoutDashboard } from 'lucide-react'
+import { FileText, Menu, X, ArrowRight, LogOut, Settings } from 'lucide-react'
 import { useAuth } from '../../context/useAuth'
 import { PWAInstallPrompt } from './PWAInstallPrompt'
 
@@ -10,14 +10,24 @@ export const Navbar: React.FC = () => {
   const navigate = useNavigate()
   const { user, signOut, isDemoMode } = useAuth()
 
-  const navLinks = [
+  // Links for visitors vs logged-in users
+  const publicNavLinks = [
     { name: 'How It Works', href: '/#how-it-works' },
     { name: 'Features', href: '/#features' },
     { name: 'ATS Demo', href: '/#demo' },
     { name: 'FAQ', href: '/#faq' },
   ]
 
+  const authenticatedNavLinks = [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Profile', href: '/profile' },
+    { name: 'JD Matcher', href: '/matcher' },
+    { name: 'ATS Checker', href: '/ats-checker' },
+  ]
+
+  const currentNavLinks = user ? authenticatedNavLinks : publicNavLinks
   const isHome = location.pathname === '/'
+  const isDashboard = location.pathname === '/dashboard'
 
   const handleSignOut = async () => {
     await signOut()
@@ -53,9 +63,27 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              isHome ? (
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+            {currentNavLinks.map((link) => {
+              if (user) {
+                const isActive = location.pathname === link.href
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`text-sm font-medium transition-colors px-2 py-1 rounded-md ${
+                      isActive
+                        ? 'text-indigo-600 font-semibold bg-indigo-50/70'
+                        : 'text-slate-600 hover:text-indigo-600 hover:bg-slate-100/50'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              }
+
+              // Public landing page anchor links
+              return isHome ? (
                 <a
                   key={link.name}
                   href={link.href.replace('/', '')}
@@ -72,21 +100,26 @@ export const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               )
-            ))}
+            })}
           </nav>
 
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-4">
-            <PWAInstallPrompt variant="pill" />
+            {/* Avoid duplicate PWA prompt when full Dashboard banner is visible */}
+            {!isDashboard && <PWAInstallPrompt variant="pill" />}
+
             {user ? (
               <div className="flex items-center gap-3">
                 <Link
-                  to="/dashboard"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 rounded-lg transition-colors"
+                  to="/settings"
+                  title="Account & Data Settings"
+                  className={`p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-slate-100 transition-colors ${
+                    location.pathname === '/settings' ? 'text-indigo-600 bg-indigo-50/70' : ''
+                  }`}
                 >
-                  <LayoutDashboard className="w-4 h-4 text-indigo-600" />
-                  <span>Dashboard</span>
+                  <Settings className="w-4 h-4" />
                 </Link>
+
                 <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
                   <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold uppercase">
                     {user.fullName ? user.fullName.charAt(0) : user.email.charAt(0)}
@@ -155,39 +188,65 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-3 pb-6 space-y-3 shadow-lg animate-in slide-in-from-top-2 duration-150">
           <div className="space-y-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href.replace('/', '')}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
+            {user ? (
+              <>
+                {authenticatedNavLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                      location.pathname === link.href
+                        ? 'text-indigo-600 font-semibold bg-indigo-50'
+                        : 'text-slate-700 hover:text-indigo-600 hover:bg-slate-50'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <Link
+                  to="/settings"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    location.pathname === '/settings'
+                      ? 'text-indigo-600 font-semibold bg-indigo-50'
+                      : 'text-slate-700 hover:text-indigo-600 hover:bg-slate-50'
+                  }`}
+                >
+                  Settings
+                </Link>
+              </>
+            ) : (
+              publicNavLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href.replace('/', '')}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))
+            )}
           </div>
+
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <div className="pb-1 px-3">
-              <PWAInstallPrompt variant="pill" />
-            </div>
+            {!isDashboard && (
+              <div className="pb-1 px-3">
+                <PWAInstallPrompt variant="pill" />
+              </div>
+            )}
             {user ? (
               <>
                 <div className="px-3 py-2 text-xs text-slate-500 font-medium">
                   Signed in as <strong className="text-slate-900">{user.email}</strong>
                 </div>
-                <Link
-                  to="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-sm"
-                >
-                  Open Dashboard
-                </Link>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false)
                     handleSignOut()
                   }}
-                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-slate-700 rounded-lg border border-slate-200 hover:bg-slate-50"
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-rose-600 rounded-lg border border-rose-200 hover:bg-rose-50"
                 >
                   Sign Out
                 </button>
@@ -216,3 +275,5 @@ export const Navbar: React.FC = () => {
     </header>
   )
 }
+
+export default Navbar

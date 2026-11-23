@@ -1,8 +1,19 @@
 import React, { Suspense, lazy, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ProtectedRoute } from './components/common/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
+
+// Auto Scroll-to-Top on Route Change
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
 
 // Hardware back-button listener for Capacitor Android app
 const AndroidBackHandler: React.FC = () => {
@@ -51,6 +62,7 @@ const PageLoader: React.FC = () => (
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AndroidBackHandler />
       <AuthProvider>
         <Suspense fallback={<PageLoader />}>

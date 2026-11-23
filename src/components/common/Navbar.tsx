@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FileText, Menu, X, ArrowRight, LogOut, LayoutDashboard } from 'lucide-react'
 import { useAuth } from '../../context/useAuth'
+import { PWAInstallPrompt } from './PWAInstallPrompt'
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -76,6 +77,7 @@ export const Navbar: React.FC = () => {
 
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-4">
+            <PWAInstallPrompt variant="pill" />
             {user ? (
               <div className="flex items-center gap-3">
                 <Link
@@ -165,6 +167,9 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+            <div className="pb-1 px-3">
+              <PWAInstallPrompt variant="pill" />
+            </div>
             {user ? (
               <>
                 <div className="px-3 py-2 text-xs text-slate-500 font-medium">

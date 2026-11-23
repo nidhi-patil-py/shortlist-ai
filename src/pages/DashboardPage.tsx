@@ -22,6 +22,7 @@ import {
   Printer,
 } from 'lucide-react'
 import { exportResumeViaPrint } from '../services/pdfExportService'
+import { PWAInstallPrompt } from '../components/common/PWAInstallPrompt'
 
 export const DashboardPage: React.FC = () => {
   const { user, isDemoMode, isSupabaseConfigured } = useAuth()
@@ -150,6 +151,9 @@ export const DashboardPage: React.FC = () => {
             </Link>
           </div>
         </div>
+
+        {/* PWA Install Banner */}
+        <PWAInstallPrompt variant="banner" />
 
         {/* Quick Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">

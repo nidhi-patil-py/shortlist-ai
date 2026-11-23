@@ -20,6 +20,7 @@ import {
   Printer,
   ZoomIn,
   ZoomOut,
+  Gauge,
 } from 'lucide-react'
 
 export const BuilderPage: React.FC = () => {
@@ -204,6 +205,15 @@ export const BuilderPage: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 self-end sm:self-auto">
+            {/* ATS Score Check */}
+            <Link
+              to={resume ? `/ats-checker?id=${resume.id}` : '/ats-checker'}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 transition-colors shadow-2xs"
+            >
+              <Gauge className="w-4 h-4 text-indigo-600" />
+              <span>ATS Score</span>
+            </Link>
+
             {/* Direct Print Preview */}
             <button
               type="button"

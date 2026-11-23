@@ -18,6 +18,7 @@ import {
   Eye,
   ShieldCheck,
   Sparkles,
+  Gauge,
 } from 'lucide-react'
 
 export const DashboardPage: React.FC = () => {
@@ -354,6 +355,13 @@ export const DashboardPage: React.FC = () => {
                     </span>
 
                     <div className="flex items-center gap-1">
+                      <Link
+                        to={`/ats-checker?id=${resume.id}`}
+                        title="Check ATS Compatibility"
+                        className="p-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+                      >
+                        <Gauge className="w-4 h-4" />
+                      </Link>
                       <Link
                         to={`/preview?id=${resume.id}`}
                         title="Preview & Download PDF"

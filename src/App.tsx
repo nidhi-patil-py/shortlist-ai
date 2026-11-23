@@ -1,8 +1,30 @@
-import React, { Suspense, lazy } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { Suspense, lazy, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ProtectedRoute } from './components/common/ProtectedRoute'
 import LandingPage from './pages/LandingPage'
+
+// Hardware back-button listener for Capacitor Android app
+const AndroidBackHandler: React.FC = () => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    let unregister: (() => void) | undefined
+    import('./services/capacitorBridge.ts').then(({ registerAndroidBackButton }) => {
+      registerAndroidBackButton(() => {
+        navigate(-1)
+      }).then((cleanup) => {
+        unregister = cleanup
+      })
+    })
+
+    return () => {
+      if (unregister) unregister()
+    }
+  }, [navigate])
+
+  return null
+}
 
 // Code-splitting via React.lazy for sub-routes to keep initial bundle size minimal
 const LoginPage = lazy(() => import('./pages/LoginPage'))
@@ -29,6 +51,7 @@ const PageLoader: React.FC = () => (
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <AndroidBackHandler />
       <AuthProvider>
         <Suspense fallback={<PageLoader />}>
           <Routes>

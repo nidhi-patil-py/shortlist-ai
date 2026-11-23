@@ -8,6 +8,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    watch: {
+      ignored: ['**/android/**', '**/dist/**'],
+    },
+  },
   build: {
     rollupOptions: {
       external: [/^core-js/],

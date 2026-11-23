@@ -331,7 +331,20 @@ export async function shareOrDownloadPDF(
 ): Promise<boolean> {
   const { blob, filename } = await generateDirectPDF(resume, paperSize)
 
-  // Check if Web Share API with files is supported
+  // 1. Native mobile container check: If running in Capacitor Android APK, use native storage + share
+  if (typeof window !== 'undefined') {
+    try {
+      const { isCapacitorNative, saveAndShareNativePDF } = await import('./capacitorBridge.ts')
+      if (isCapacitorNative()) {
+        const shared = await saveAndShareNativePDF(blob, filename)
+        if (shared) return true
+      }
+    } catch (e) {
+      console.warn('Native Capacitor share bridge check skipped:', e)
+    }
+  }
+
+  // 2. Browser Web Share API check
   const file = new File([blob], filename, { type: 'application/pdf' })
   if (
     navigator.canShare &&

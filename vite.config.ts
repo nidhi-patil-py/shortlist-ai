@@ -10,9 +10,13 @@ export default defineConfig({
   ],
   build: {
     rollupOptions: {
+      external: [/^core-js/],
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (id.includes('jspdf')) {
+              return 'vendor-jspdf'
+            }
             if (id.includes('react-router-dom') || id.includes('react-dom') || id.includes('react')) {
               return 'vendor-react'
             }
@@ -26,6 +30,6 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 900,
   },
 })

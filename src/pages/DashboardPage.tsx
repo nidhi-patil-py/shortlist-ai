@@ -19,7 +19,9 @@ import {
   ShieldCheck,
   Sparkles,
   Gauge,
+  Printer,
 } from 'lucide-react'
+import { exportResumeViaPrint } from '../services/pdfExportService'
 
 export const DashboardPage: React.FC = () => {
   const { user, isDemoMode, isSupabaseConfigured } = useAuth()
@@ -364,11 +366,19 @@ export const DashboardPage: React.FC = () => {
                       </Link>
                       <Link
                         to={`/preview?id=${resume.id}`}
-                        title="Preview & Download PDF"
+                        title="Preview & Full PDF Options"
                         className="p-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
                       >
                         <Eye className="w-4 h-4" />
                       </Link>
+                      <button
+                        type="button"
+                        onClick={() => exportResumeViaPrint(resume)}
+                        title="Instant Download ATS PDF"
+                        className="p-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+                      >
+                        <Printer className="w-4 h-4" />
+                      </button>
                       <Link
                         to={`/builder?id=${resume.id}`}
                         title="Edit Resume"

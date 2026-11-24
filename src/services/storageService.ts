@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from './supabase'
+import { supabase, isSupabaseConfigured } from './supabase.ts'
 import type {
   UserProfile,
   ResumeData,
@@ -7,7 +7,7 @@ import type {
   ExperienceItem,
   ProjectItem,
   CertificationItem,
-} from '../types/resume'
+} from '../types/resume.ts'
 
 // Default seed profile for demo or new user onboarding
 export const DEFAULT_SAMPLE_PROFILE: UserProfile = {
@@ -239,15 +239,15 @@ export const storageService = {
       try {
         await supabase.from('profiles').upsert({
           user_id: userId,
-          full_name: profile.personal.fullName,
-          email: profile.personal.email,
-          phone: profile.personal.phone,
-          location: profile.personal.location,
+          full_name: profile.personal.fullName || '',
+          email: profile.personal.email || '',
+          phone: profile.personal.phone || '',
+          location: profile.personal.location || '',
           professional_title: profile.personal.professionalTitle || '',
-          professional_summary: profile.personal.professionalSummary,
-          linkedin_url: profile.personal.linkedinUrl,
-          github_url: profile.personal.githubUrl,
-          portfolio_url: profile.personal.portfolioUrl,
+          professional_summary: profile.personal.professionalSummary || '',
+          linkedin_url: profile.personal.linkedinUrl || '',
+          github_url: profile.personal.githubUrl || '',
+          portfolio_url: profile.personal.portfolioUrl || '',
           other_url: profile.personal.otherUrl || '',
           updated_at: updatedProfile.updatedAt,
         })
@@ -258,26 +258,26 @@ export const storageService = {
           await supabase.from('education').insert(
             profile.education.map((e) => ({
               user_id: userId,
-              degree: e.degree,
-              institution: e.institution,
+              degree: e.degree || '',
+              institution: e.institution || '',
               field_of_study: e.fieldOfStudy || '',
-              start_date: e.startDate,
-              end_date: e.endDate,
+              start_date: e.startDate || '',
+              end_date: e.endDate || '',
               grade: e.grade || '',
-              description: e.description,
+              description: e.description || '',
             }))
           )
         }
 
-        // Replace skills
+        // Replace skills with strict constraint validation
         await supabase.from('skills').delete().eq('user_id', userId)
         if (profile.skills.length > 0) {
           await supabase.from('skills').insert(
             profile.skills.map((s) => ({
               user_id: userId,
-              name: s.name,
-              category: s.category,
-              level: s.level,
+              name: s.name || '',
+              category: (s.category && ['technical', 'soft', 'tools'].includes(s.category) ? s.category : 'technical'),
+              level: (s.level && ['beginner', 'intermediate', 'advanced'].includes(s.level) ? s.level : 'intermediate'),
             }))
           )
         }
@@ -288,13 +288,13 @@ export const storageService = {
           await supabase.from('experience').insert(
             profile.experience.map((ex) => ({
               user_id: userId,
-              company: ex.company,
-              job_title: ex.jobTitle,
-              start_date: ex.startDate,
-              end_date: ex.endDate,
-              duration: ex.duration,
-              responsibilities: ex.responsibilities,
-              achievements: ex.achievements,
+              company: ex.company || '',
+              job_title: ex.jobTitle || '',
+              start_date: ex.startDate || '',
+              end_date: ex.endDate || '',
+              duration: ex.duration || '',
+              responsibilities: ex.responsibilities || [],
+              achievements: ex.achievements || [],
             }))
           )
         }
@@ -305,10 +305,10 @@ export const storageService = {
           await supabase.from('projects').insert(
             profile.projects.map((p) => ({
               user_id: userId,
-              name: p.name,
-              description: p.description,
-              technologies: p.technologies,
-              project_link: p.projectLink,
+              name: p.name || '',
+              description: p.description || '',
+              technologies: p.technologies || [],
+              project_link: p.projectLink || '',
               start_date: p.startDate || '',
               end_date: p.endDate || '',
             }))
@@ -321,10 +321,10 @@ export const storageService = {
           await supabase.from('certifications').insert(
             profile.certifications.map((c) => ({
               user_id: userId,
-              name: c.name,
-              issuing_org: c.issuingOrg,
-              issue_date: c.issueDate,
-              credential_url: c.credentialUrl,
+              name: c.name || '',
+              issuing_org: c.issuingOrg || '',
+              issue_date: c.issueDate || '',
+              credential_url: c.credentialUrl || '',
             }))
           )
         }
@@ -467,5 +467,30 @@ export const storageService = {
     const resumes = await this.getResumes(userId)
     const filtered = resumes.filter((r) => r.id !== resumeId)
     localStorage.setItem(getStorageKey(userId, 'resumes'), JSON.stringify(filtered))
+  },
+
+  // Complete User Account & Data Deletion
+  async deleteUserAccount(userId: string): Promise<void> {
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await Promise.all([
+          supabase.from('resumes').delete().eq('user_id', userId),
+          supabase.from('education').delete().eq('user_id', userId),
+          supabase.from('skills').delete().eq('user_id', userId),
+          supabase.from('experience').delete().eq('user_id', userId),
+          supabase.from('projects').delete().eq('user_id', userId),
+          supabase.from('certifications').delete().eq('user_id', userId),
+          supabase.from('profiles').delete().eq('user_id', userId),
+        ])
+      } catch (err) {
+        console.warn('Error deleting cloud account records in Supabase:', err)
+      }
+    }
+
+    // Purge all local user storage keys (current & legacy)
+    localStorage.removeItem(getStorageKey(userId, 'profile'))
+    localStorage.removeItem(getStorageKey(userId, 'resumes'))
+    localStorage.removeItem(getLegacyKey(userId, 'profile'))
+    localStorage.removeItem(getLegacyKey(userId, 'resumes'))
   },
 }

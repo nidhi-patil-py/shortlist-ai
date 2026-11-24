@@ -153,7 +153,7 @@ export const ProfilePage: React.FC = () => {
   }
 
   // Confirm and apply verified extracted profile data
-  const handleConfirmImport = () => {
+  const handleConfirmImport = async () => {
     if (!user || !profile || !extractedData || !isVerified) return
 
     const updatedProfile: UserProfile = {
@@ -180,12 +180,21 @@ export const ProfilePage: React.FC = () => {
       updatedAt: new Date().toISOString(),
     }
 
-    setProfile(updatedProfile)
-    setShowImportModal(false)
-    setExtractedData(null)
-    setIsVerified(false)
-    setSaveSuccess(true)
-    setTimeout(() => setSaveSuccess(false), 3500)
+    try {
+      await storageService.saveUserProfile(user.id, updatedProfile)
+      setProfile(updatedProfile)
+      setShowImportModal(false)
+      setExtractedData(null)
+      setIsVerified(false)
+      setSaveSuccess(true)
+      setTimeout(() => setSaveSuccess(false), 3500)
+    } catch (err) {
+      console.error('Failed to persist imported profile:', err)
+      setProfile(updatedProfile)
+      setShowImportModal(false)
+      setExtractedData(null)
+      setIsVerified(false)
+    }
   }
 
   const tabs = [

@@ -8,6 +8,7 @@ import './capacitorBridge.test.ts'
 import './theme.test.ts'
 import './profileImporter.test.ts'
 import './e2eAudit.test.ts'
+import './healthAudit.test.ts'
 
 console.log('\n=========================================')
 console.log('✅ ALL TEST SUITES COMPLETED SUCCESSFULLY')

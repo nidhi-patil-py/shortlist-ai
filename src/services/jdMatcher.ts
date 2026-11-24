@@ -144,6 +144,27 @@ export function matchJobDescription(
   profile: UserProfile,
   targetJobTitle?: string
 ): JDAnalysisResult {
+  const safeProfile: UserProfile = {
+    userId: profile?.userId || '',
+    personal: profile?.personal || {
+      fullName: '',
+      email: '',
+      phone: '',
+      location: '',
+      professionalTitle: '',
+      professionalSummary: '',
+      linkedinUrl: '',
+      githubUrl: '',
+      portfolioUrl: '',
+      otherUrl: '',
+    },
+    skills: profile?.skills || [],
+    education: profile?.education || [],
+    experience: profile?.experience || [],
+    projects: profile?.projects || [],
+    certifications: profile?.certifications || [],
+  }
+
   const extracted = extractCanonicalKeywords(jobDescription)
   const jdCanonicals = extracted.allCanonicals
 
@@ -153,10 +174,10 @@ export function matchJobDescription(
       matchedSkills: [],
       missingSkills: [],
       allJdKeywords: { technical: [], tools: [], soft: [] },
-      prioritizedProjects: profile.projects,
-      prioritizedExperience: profile.experience,
-      rankedSkills: profile.skills,
-      tailoredSummary: profile.personal.professionalSummary,
+      prioritizedProjects: safeProfile.projects,
+      prioritizedExperience: safeProfile.experience,
+      rankedSkills: safeProfile.skills,
+      tailoredSummary: safeProfile.personal.professionalSummary,
     }
   }
 
@@ -165,7 +186,7 @@ export function matchJobDescription(
   const missingSkills: string[] = []
 
   for (const canonical of jdCanonicals) {
-    const isMatched = profile.skills.some((userSkill) => isSkillMatch(userSkill.name, canonical))
+    const isMatched = safeProfile.skills.some((userSkill) => isSkillMatch(userSkill.name, canonical))
     if (isMatched) {
       matchedSkills.push(canonical)
     } else {
@@ -175,9 +196,9 @@ export function matchJobDescription(
 
   // 2. Calculate match percentage (0 - 100)
   const keywordRatio = matchedSkills.length / Math.max(1, jdCanonicals.length)
-  const hasProjects = profile.projects.length > 0 ? 10 : 0
-  const hasExperience = profile.experience.length > 0 ? 10 : 0
-  const hasSummary = profile.personal.professionalSummary ? 5 : 0
+  const hasProjects = safeProfile.projects.length > 0 ? 10 : 0
+  const hasExperience = safeProfile.experience.length > 0 ? 10 : 0
+  const hasSummary = safeProfile.personal.professionalSummary ? 5 : 0
 
   const matchPercentage = Math.min(
     100,
@@ -186,7 +207,7 @@ export function matchJobDescription(
 
   // 3. Reorder and rank the candidate's existing skills
   // Matched skills are prioritized at the top; no fake skills are ever added
-  const rankedSkills = [...profile.skills].sort((a, b) => {
+  const rankedSkills = [...safeProfile.skills].sort((a, b) => {
     const aMatched = jdCanonicals.some((c) => isSkillMatch(a.name, c))
     const bMatched = jdCanonicals.some((c) => isSkillMatch(b.name, c))
     if (aMatched && !bMatched) return -1
@@ -195,7 +216,7 @@ export function matchJobDescription(
   })
 
   // 4. Prioritize Projects based on JD keyword relevance
-  const prioritizedProjects = [...profile.projects].sort((a, b) => {
+  const prioritizedProjects = [...safeProfile.projects].sort((a, b) => {
     const scoreA = calculateItemRelevance(
       `${a.name} ${a.description} ${(a.technologies || []).join(' ')}`,
       jdCanonicals
@@ -208,7 +229,7 @@ export function matchJobDescription(
   })
 
   // 5. Prioritize Experience based on JD keyword relevance
-  const prioritizedExperience = [...profile.experience].sort((a, b) => {
+  const prioritizedExperience = [...safeProfile.experience].sort((a, b) => {
     const scoreA = calculateItemRelevance(
       `${a.jobTitle} ${a.company} ${(a.responsibilities || []).join(' ')} ${(a.achievements || []).join(' ')}`,
       jdCanonicals
@@ -221,7 +242,7 @@ export function matchJobDescription(
   })
 
   // 6. Formulate tailored professional summary using ONLY candidate's genuine matched skills
-  let tailoredSummary = profile.personal.professionalSummary
+  let tailoredSummary = safeProfile.personal.professionalSummary
   if (matchedSkills.length > 0 && targetJobTitle) {
     const topMatched = matchedSkills.slice(0, 4).join(', ')
     tailoredSummary = `Results-oriented professional targeting the ${targetJobTitle} position. Proven technical background in ${topMatched}, with demonstrated experience executing high-quality web applications, adhering to clean architecture standards, and collaborating across agile environments.`
@@ -268,15 +289,28 @@ export function buildTailoredResume(
   targetCompany: string,
   jobDescription: string
 ): ResumeData {
-  const companyPrefix = targetCompany.trim() ? ` - ${targetCompany.trim()}` : ''
-  const roleTitle = targetJobTitle.trim() || 'Software Engineer'
+  const companyPrefix = (targetCompany || '').trim() ? ` - ${(targetCompany || '').trim()}` : ''
+  const roleTitle = (targetJobTitle || '').trim() || 'Software Engineer'
+
+  const safePersonal = profile?.personal || {
+    fullName: '',
+    email: '',
+    phone: '',
+    location: '',
+    professionalTitle: '',
+    professionalSummary: '',
+    linkedinUrl: '',
+    githubUrl: '',
+    portfolioUrl: '',
+    otherUrl: '',
+  }
 
   return {
     id: `resume-${Date.now()}`,
-    userId: profile.userId,
+    userId: profile?.userId || '',
     title: `${roleTitle}${companyPrefix} Resume`,
     targetJobTitle: roleTitle,
-    jobDescription: jobDescription.trim(),
+    jobDescription: (jobDescription || '').trim(),
     templateId: 'ats-modern',
     settings: {
       sectionOrder: ['summary', 'skills', 'projects', 'experience', 'education', 'certifications'],
@@ -293,20 +327,20 @@ export function buildTailoredResume(
       spacing: 'normal',
     },
     personal: {
-      ...profile.personal,
+      ...safePersonal,
       professionalTitle: roleTitle,
-      professionalSummary: analysis.tailoredSummary || profile.personal.professionalSummary,
+      professionalSummary: analysis?.tailoredSummary || safePersonal.professionalSummary || '',
     },
     // Genuine, ranked skills with matched skills at the front
-    skills: analysis.rankedSkills,
+    skills: analysis?.rankedSkills || [],
     // Projects prioritized by relevance
-    projects: analysis.prioritizedProjects,
+    projects: analysis?.prioritizedProjects || [],
     // Experience prioritized by relevance
-    experience: analysis.prioritizedExperience,
-    education: profile.education,
-    certifications: profile.certifications,
-    atsScore: analysis.matchPercentage,
-    matchedKeywords: analysis.matchedSkills,
+    experience: analysis?.prioritizedExperience || [],
+    education: profile?.education || [],
+    certifications: profile?.certifications || [],
+    atsScore: analysis?.matchPercentage || 0,
+    matchedKeywords: analysis?.matchedSkills || [],
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }

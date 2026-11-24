@@ -7,7 +7,7 @@ export type PaperSize = 'a4' | 'letter'
  * e.g., "Alex_Morgan_Frontend_Engineer_Resume.pdf"
  */
 export function formatResumeFilename(resume: ResumeData): string {
-  const name = resume.personal.fullName?.trim() || 'Candidate'
+  const name = resume.personal?.fullName?.trim() || 'Candidate'
   const role = resume.targetJobTitle?.trim() || 'Resume'
 
   const cleanName = name.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_')
@@ -101,12 +101,12 @@ export async function generateDirectPDF(
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(20)
   doc.setTextColor(15, 23, 42) // Slate 900
-  const fullName = resume.personal.fullName || 'Candidate'
+  const fullName = resume.personal?.fullName || 'Candidate'
   doc.text(fullName, marginLeft, y)
   y += 6
 
   // Professional Title
-  if (resume.personal.professionalTitle) {
+  if (resume.personal?.professionalTitle) {
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(11)
     doc.setTextColor(79, 70, 229) // Indigo 600
@@ -120,12 +120,12 @@ export async function generateDirectPDF(
   doc.setTextColor(100, 116, 139) // Slate 500
 
   const contactParts: string[] = []
-  if (resume.personal.email) contactParts.push(resume.personal.email)
-  if (resume.personal.phone) contactParts.push(resume.personal.phone)
-  if (resume.personal.location) contactParts.push(resume.personal.location)
-  if (resume.personal.linkedinUrl) contactParts.push(resume.personal.linkedinUrl.replace(/^https?:\/\//, ''))
-  if (resume.personal.githubUrl) contactParts.push(resume.personal.githubUrl.replace(/^https?:\/\//, ''))
-  if (resume.personal.portfolioUrl) contactParts.push(resume.personal.portfolioUrl.replace(/^https?:\/\//, ''))
+  if (resume.personal?.email) contactParts.push(resume.personal.email)
+  if (resume.personal?.phone) contactParts.push(resume.personal.phone)
+  if (resume.personal?.location) contactParts.push(resume.personal.location)
+  if (resume.personal?.linkedinUrl) contactParts.push(resume.personal.linkedinUrl.replace(/^https?:\/\//, ''))
+  if (resume.personal?.githubUrl) contactParts.push(resume.personal.githubUrl.replace(/^https?:\/\//, ''))
+  if (resume.personal?.portfolioUrl) contactParts.push(resume.personal.portfolioUrl.replace(/^https?:\/\//, ''))
 
   const contactLine = contactParts.join('  •  ')
   const contactLines = doc.splitTextToSize(contactLine, contentWidth)
@@ -154,7 +154,7 @@ export async function generateDirectPDF(
   }
 
   // 2. Professional Summary
-  if (resume.personal.professionalSummary && resume.personal.professionalSummary.trim()) {
+  if (resume.personal?.professionalSummary && resume.personal.professionalSummary.trim()) {
     renderSectionHeader('Professional Summary')
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(9)

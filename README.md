@@ -102,7 +102,7 @@ VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ### Step 3: Run Database Migrations
 1. Open your Supabase Dashboard and go to the **SQL Editor**.
-2. Copy the entire contents of [`supabase/schema.sql`](file:///d:/ResumeFit/supabase/schema.sql) and execute it.
+2. Copy the entire contents of [`supabase/schema.sql`](supabase/schema.sql) and execute it.
 3. This creates:
    - Tables: `profiles`, `education`, `skills`, `experience`, `projects`, `certifications`, `resumes`
    - Strict Row Level Security (RLS) policies ensuring users can only read, insert, update, or delete their own data (`auth.uid() = user_id`)
@@ -113,7 +113,7 @@ VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ## 🌐 Web Deployment (Vercel / Netlify)
 
 ### Deploying to Vercel
-Shortlist AI is pre-configured with a production [`vercel.json`](file:///d:/ResumeFit/vercel.json) supporting Single Page Application (SPA) routing, service worker cache busting, and security headers:
+Shortlist AI is pre-configured with a production [`vercel.json`](vercel.json) supporting Single Page Application (SPA) routing, service worker cache busting, and security headers:
 
 1. Push your repository to GitHub or GitLab.
 2. Import the project in [Vercel](https://vercel.com).

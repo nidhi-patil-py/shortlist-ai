@@ -75,6 +75,23 @@ export function checkResumeATS(
   const suggestions: ATSActionableSuggestion[] = []
   const allPassedChecks: string[] = []
 
+  const safePersonal = doc?.personal || {
+    fullName: '',
+    email: '',
+    phone: '',
+    location: '',
+    professionalTitle: '',
+    professionalSummary: '',
+    linkedinUrl: '',
+    githubUrl: '',
+    portfolioUrl: '',
+    otherUrl: '',
+  }
+  const safeSkills = doc?.skills || []
+  const safeEducation = doc?.education || []
+  const safeExperience = doc?.experience || []
+  const safeProjects = doc?.projects || []
+
   // -------------------------------------------------------------
   // 1. Contact & Header Completeness (15 Points Max)
   // -------------------------------------------------------------
@@ -83,7 +100,7 @@ export function checkResumeATS(
   const contactFailed: string[] = []
 
   // Full Name
-  if (doc.personal.fullName && doc.personal.fullName.trim().length >= 2) {
+  if (safePersonal.fullName && safePersonal.fullName.trim().length >= 2) {
     contactScore += 3
     contactPassed.push('Candidate name clearly present')
     allPassedChecks.push('Full candidate name detected')
@@ -99,7 +116,7 @@ export function checkResumeATS(
   }
 
   // Email
-  if (doc.personal.email && EMAIL_REGEX.test(doc.personal.email.trim())) {
+  if (safePersonal.email && EMAIL_REGEX.test(safePersonal.email.trim())) {
     contactScore += 3
     contactPassed.push('Valid email address provided')
     allPassedChecks.push('Standard email address format valid')
@@ -115,7 +132,7 @@ export function checkResumeATS(
   }
 
   // Phone
-  if (doc.personal.phone && doc.personal.phone.trim().length >= 7 && PHONE_REGEX.test(doc.personal.phone)) {
+  if (safePersonal.phone && safePersonal.phone.trim().length >= 7 && PHONE_REGEX.test(safePersonal.phone)) {
     contactScore += 3
     contactPassed.push('Valid phone number provided')
     allPassedChecks.push('Direct contact phone number included')
@@ -131,7 +148,7 @@ export function checkResumeATS(
   }
 
   // Location
-  if (doc.personal.location && doc.personal.location.trim().length >= 3) {
+  if (safePersonal.location && safePersonal.location.trim().length >= 3) {
     contactScore += 3
     contactPassed.push('Geographic location provided')
     allPassedChecks.push('Location (City, State/Country) present')
@@ -148,10 +165,10 @@ export function checkResumeATS(
 
   // Professional Links
   const hasLink = Boolean(
-    (doc.personal.linkedinUrl && doc.personal.linkedinUrl.trim()) ||
-    (doc.personal.githubUrl && doc.personal.githubUrl.trim()) ||
-    (doc.personal.portfolioUrl && doc.personal.portfolioUrl.trim()) ||
-    (doc.personal.otherUrl && doc.personal.otherUrl.trim())
+    (safePersonal.linkedinUrl && safePersonal.linkedinUrl.trim()) ||
+    (safePersonal.githubUrl && safePersonal.githubUrl.trim()) ||
+    (safePersonal.portfolioUrl && safePersonal.portfolioUrl.trim()) ||
+    (safePersonal.otherUrl && safePersonal.otherUrl.trim())
   )
   if (hasLink) {
     contactScore += 3
@@ -186,7 +203,7 @@ export function checkResumeATS(
   const structureFailed: string[] = []
 
   // Professional Summary
-  if (doc.personal.professionalSummary && doc.personal.professionalSummary.trim().length >= 20) {
+  if (safePersonal.professionalSummary && safePersonal.professionalSummary.trim().length >= 20) {
     structureScore += 4
     structurePassed.push('Professional summary section present')
     allPassedChecks.push('Standard professional summary section included')
@@ -202,11 +219,11 @@ export function checkResumeATS(
   }
 
   // Skills Section
-  if (doc.skills && doc.skills.length >= 3) {
+  if (safeSkills.length >= 3) {
     structureScore += 5
-    structurePassed.push(`Skills section well-populated (${doc.skills.length} skills listed)`)
-    allPassedChecks.push(`Dedicated Skills section with ${doc.skills.length} competencies`)
-  } else if (doc.skills && doc.skills.length > 0) {
+    structurePassed.push(`Skills section well-populated (${safeSkills.length} skills listed)`)
+    allPassedChecks.push(`Dedicated Skills section with ${safeSkills.length} competencies`)
+  } else if (safeSkills.length > 0) {
     structureScore += 2
     structureFailed.push('Skills section has fewer than 3 skills')
     suggestions.push({
@@ -228,8 +245,8 @@ export function checkResumeATS(
   }
 
   // Experience or Projects
-  const hasExperience = doc.experience && doc.experience.length > 0
-  const hasProjects = doc.projects && doc.projects.length > 0
+  const hasExperience = safeExperience.length > 0
+  const hasProjects = safeProjects.length > 0
 
   if (hasExperience && hasProjects) {
     structureScore += 6
@@ -251,7 +268,7 @@ export function checkResumeATS(
   }
 
   // Education Section
-  if (doc.education && doc.education.length > 0) {
+  if (safeEducation.length > 0) {
     structureScore += 5
     structurePassed.push('Education section present with accredited degree')
     allPassedChecks.push('Formal Education section verified')
@@ -292,14 +309,14 @@ export function checkResumeATS(
 
     if (jdCanonicals.length > 0) {
       // Gather all text from candidate document for deep keyword match
-      const docSkills = doc.skills.map((s) => s.name)
-      const projectTech = doc.projects.flatMap((p) => p.technologies || [])
+      const docSkills = safeSkills.map((s) => s.name)
+      const projectTech = safeProjects.flatMap((p) => p.technologies || [])
       const allCandidateTokens = [
         ...docSkills,
         ...projectTech,
-        doc.personal.professionalSummary || '',
-        ...doc.projects.map((p) => `${p.name} ${p.description}`),
-        ...doc.experience.map((e) => `${e.jobTitle} ${(e.responsibilities || []).join(' ')}`),
+        safePersonal.professionalSummary || '',
+        ...safeProjects.map((p) => `${p.name} ${p.description || ''}`),
+        ...safeExperience.map((e) => `${e.jobTitle} ${(e.responsibilities || []).join(' ')}`),
       ].join(' ')
 
       for (const canonical of jdCanonicals) {
@@ -336,8 +353,8 @@ export function checkResumeATS(
     }
   } else {
     // General Technical & Industry Competency Density (No JD provided)
-    const docSkills = doc.skills.map((s) => s.name)
-    const projectTech = doc.projects.flatMap((p) => p.technologies || [])
+    const docSkills = safeSkills.map((s) => s.name)
+    const projectTech = safeProjects.flatMap((p) => p.technologies || [])
     const combinedCandidateSkills = [...new Set([...docSkills, ...projectTech])]
 
     let recognizedCount = 0
@@ -407,11 +424,11 @@ export function checkResumeATS(
 
   // Extract all bullet items
   const allBullets: string[] = [
-    ...doc.experience.flatMap((e) => [
+    ...safeExperience.flatMap((e) => [
       ...(e.responsibilities || []),
       ...(e.achievements || []),
     ]),
-    ...doc.projects.map((p) => p.description || ''),
+    ...safeProjects.map((p) => p.description || ''),
   ].filter((b) => b.trim().length > 0)
 
   // Find unique action verbs
@@ -505,7 +522,7 @@ export function checkResumeATS(
   const readabilityFailed: string[] = []
 
   // Summary Length check (5 pts)
-  const summaryLength = (doc.personal.professionalSummary || '').trim().length
+  const summaryLength = (safePersonal.professionalSummary || '').trim().length
   if (summaryLength >= 100 && summaryLength <= 450) {
     readabilityScore += 5
     readabilityPassed.push(`Optimal summary length (${summaryLength} characters - within 100-450 range)`)

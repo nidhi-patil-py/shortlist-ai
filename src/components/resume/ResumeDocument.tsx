@@ -69,21 +69,35 @@ export const ResumeDocument: React.FC<Props> = ({ resume }) => {
       ? 'space-y-6'
       : 'space-y-4'
 
+  // Safe fallback for personal details
+  const safePersonal = personal || {
+    fullName: '',
+    email: '',
+    phone: '',
+    location: '',
+    professionalTitle: '',
+    professionalSummary: '',
+    linkedinUrl: '',
+    githubUrl: '',
+    portfolioUrl: '',
+    otherUrl: '',
+  }
+
   // Contact items for header
   const contactParts: string[] = []
-  if (personal.phone) contactParts.push(personal.phone)
-  if (personal.email) contactParts.push(personal.email)
-  if (personal.location) contactParts.push(personal.location)
-  if (personal.linkedinUrl) {
-    const clean = personal.linkedinUrl.replace(/^https?:\/\/(www\.)?/, '')
+  if (safePersonal.phone) contactParts.push(safePersonal.phone)
+  if (safePersonal.email) contactParts.push(safePersonal.email)
+  if (safePersonal.location) contactParts.push(safePersonal.location)
+  if (safePersonal.linkedinUrl) {
+    const clean = safePersonal.linkedinUrl.replace(/^https?:\/\/(www\.)?/, '')
     contactParts.push(clean)
   }
-  if (personal.githubUrl) {
-    const clean = personal.githubUrl.replace(/^https?:\/\/(www\.)?/, '')
+  if (safePersonal.githubUrl) {
+    const clean = safePersonal.githubUrl.replace(/^https?:\/\/(www\.)?/, '')
     contactParts.push(clean)
   }
-  if (personal.portfolioUrl) {
-    const clean = personal.portfolioUrl.replace(/^https?:\/\/(www\.)?/, '')
+  if (safePersonal.portfolioUrl) {
+    const clean = safePersonal.portfolioUrl.replace(/^https?:\/\/(www\.)?/, '')
     contactParts.push(clean)
   }
 
@@ -315,11 +329,11 @@ export const ResumeDocument: React.FC<Props> = ({ resume }) => {
       <header className={`resume-item-block pb-3 border-b ${getHeaderBorder(templateId)}`}>
         <div className={getHeaderAlignment(templateId)}>
           <h1 className={`${sizeClasses.name} font-black tracking-tight text-slate-900 uppercase`}>
-            {personal.fullName || 'Your Full Name'}
+            {safePersonal.fullName || 'Your Full Name'}
           </h1>
-          {personal.professionalTitle && (
+          {safePersonal.professionalTitle && (
             <p className="text-xs sm:text-sm font-semibold text-slate-700 tracking-wide mt-0.5">
-              {personal.professionalTitle}
+              {safePersonal.professionalTitle}
             </p>
           )}
           {contactParts.length > 0 && (

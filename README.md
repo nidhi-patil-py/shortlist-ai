@@ -1,4 +1,4 @@
-# ResumeFit — Lightweight ATS Resume Builder SaaS & Android App
+# Shortlist AI — Lightweight ATS Resume Builder SaaS & Android App
 
 > **Production-ready, deterministic ATS resume builder with zero-hallucination job description matching, instant vector PDF export, offline PWA capabilities, and an ultra-lean 4.58 MB native Android APK.**
 
@@ -6,10 +6,10 @@
 
 ## 🌟 Overview & Key Principles
 
-ResumeFit is built for students, freshers, career switchers, and professionals who need high-impact, ATS-optimized resumes tailored to specific job descriptions without subscriptions, paid AI API keys, or hallucinated claims.
+Shortlist AI is built for students, freshers, career switchers, and professionals who need high-impact, ATS-optimized resumes tailored to specific job descriptions without subscriptions, paid AI API keys, or hallucinated claims.
 
 ### Core Architectural Guarantees:
-1. **Strict Zero-Hallucination Policy**: Unlike LLM wrapper apps that invent fake metrics or skills, ResumeFit uses a deterministic rule-based NLP ontology. It strictly matches, ranks, and prioritizes qualifications that **actually exist** in your Master Profile.
+1. **Strict Zero-Hallucination Policy**: Unlike LLM wrapper apps that invent fake metrics or skills, Shortlist AI uses a deterministic rule-based NLP ontology. It strictly matches, ranks, and prioritizes qualifications that **actually exist** in your Master Profile.
 2. **Transparent 100-Point ATS Diagnostic Checker**: Breaks down resume health into 4 transparent categories (Contact Completeness, Standard Structure, Keyword Alignment, and Quantified Action Verbs) with clear educational disclaimers.
 3. **100% Selectable Vector PDFs**: Dual export system featuring native vector browser printing (0 kB bloat, perfect ATS machine-readability) and on-demand programmatic jsPDF export.
 4. **Featherweight Performance**:
@@ -56,8 +56,8 @@ ResumeFit is built for students, freshers, career switchers, and professionals w
 
 ### 2. Installation
 ```bash
-git clone https://github.com/your-username/resumefit.git
-cd resumefit
+git clone https://github.com/your-username/shortlist-ai.git
+cd shortlist-ai
 npm install
 ```
 
@@ -83,7 +83,7 @@ npm run build
 
 ## 🗄️ Supabase Cloud Setup (Optional)
 
-ResumeFit runs completely offline in **Local Demo Mode** by default. To connect your own Supabase Cloud instance:
+Shortlist AI runs completely offline in **Local Demo Mode** by default. To connect your own Supabase Cloud instance:
 
 ### Step 1: Create a Supabase Project
 1. Go to [supabase.com](https://supabase.com) and create a new project.
@@ -113,7 +113,7 @@ VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ## 🌐 Web Deployment (Vercel / Netlify)
 
 ### Deploying to Vercel
-ResumeFit is pre-configured with a production [`vercel.json`](file:///d:/ResumeFit/vercel.json) supporting Single Page Application (SPA) routing, service worker cache busting, and security headers:
+Shortlist AI is pre-configured with a production [`vercel.json`](file:///d:/ResumeFit/vercel.json) supporting Single Page Application (SPA) routing, service worker cache busting, and security headers:
 
 1. Push your repository to GitHub or GitLab.
 2. Import the project in [Vercel](https://vercel.com).
@@ -126,12 +126,12 @@ ResumeFit is pre-configured with a production [`vercel.json`](file:///d:/ResumeF
 
 ## 📱 Android Application via Capacitor
 
-ResumeFit includes a production native Android project with hardware back-button navigation and native PDF share-sheet integration.
+Shortlist AI includes a production native Android project with hardware back-button navigation and native PDF share-sheet integration.
 
 ### Android Project Structure
 - Native Android root: `android/`
-- Application ID: `com.resumefit.app`
-- Main Activity: `android/app/src/main/java/com/resumefit/app/MainActivity.java`
+- Application ID: `com.shortlistai.app`
+- Main Activity: `android/app/src/main/java/com/shortlistai/app/MainActivity.java`
 - App Colors: `android/app/src/main/res/values/colors.xml` (`#4F46E5`)
 
 ### 1. Sync Web Assets to Android
@@ -161,7 +161,7 @@ android/app/build/outputs/apk/debug/app-debug.apk (Size: 4.58 MB)
 ### 4. Build Signed Release APK for Google Play / Sideloading
 1. Generate a keystore (if you don't already have one):
    ```bash
-   keytool -genkey -v -keystore resumefit-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias resumefit
+   keytool -genkey -v -keystore shortlistai-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias shortlistai
    ```
 2. Configure signing in `android/app/build.gradle` or use Android Studio:
    - In Android Studio: *Build > Generate Signed Bundle / APK > APK*.

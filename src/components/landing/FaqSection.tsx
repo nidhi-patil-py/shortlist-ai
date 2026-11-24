@@ -8,29 +8,29 @@ interface FaqItem {
 
 const FAQS: FaqItem[] = [
   {
-    question: 'How does job-specific resume generation work in ResumeFit?',
+    question: 'How does job-specific resume generation work in Shortlist AI?',
     answer:
       'You create your master profile once with your authentic skills, work history, projects, and education. When you paste any job description, our deterministic keyword engine scans the requirements and aligns your existing profile by prioritizing matching technical keywords and relevant projects at the top of your resume.',
   },
   {
-    question: 'Does ResumeFit require paid AI API keys like OpenAI, Gemini, or Claude?',
+    question: 'Does Shortlist AI require paid AI API keys like OpenAI, Gemini, or Claude?',
     answer:
-      'No! ResumeFit uses custom, lightweight TypeScript/JavaScript logic for fast, transparent, client-side keyword matching. It does not require any paid AI APIs, keeps latency virtually instant, and protects your privacy without sharing your data with external model training pipelines.',
+      'No! Shortlist AI uses custom, lightweight TypeScript/JavaScript logic for fast, transparent, client-side keyword matching. It does not require any paid AI APIs, keeps latency virtually instant, and protects your privacy without sharing your data with external model training pipelines.',
   },
   {
-    question: 'Can ResumeFit invent skills or qualifications I do not possess?',
+    question: 'Can Shortlist AI invent skills or qualifications I do not possess?',
     answer:
-      'Never. ResumeFit strictly adheres to an ethical engineering standard. We only match against your verified user profile. If a job listing requires a competency you do not have, our ATS checker lists it in your "Missing Skills" report so you can learn it, but never fabricates it on your resume.',
+      'Never. Shortlist AI strictly adheres to an ethical engineering standard. We only match against your verified user profile. If a job listing requires a competency you do not have, our ATS checker lists it in your "Missing Skills" report so you can learn it, but never fabricates it on your resume.',
   },
   {
     question: 'Does a high ATS score guarantee a job interview or offer?',
     answer:
-      'No. We explicitly do not claim any score guarantees job selection. The ResumeFit ATS score is an internal diagnostic benchmark showing keyword overlap, structural formatting compliance, and completeness to help you pass initial automated filtering and reach human recruiters.',
+      'No. We explicitly do not claim any score guarantees job selection. The Shortlist AI ATS score is an internal diagnostic benchmark showing keyword overlap, structural formatting compliance, and completeness to help you pass initial automated filtering and reach human recruiters.',
   },
   {
     question: 'Is there an Android app available?',
     answer:
-      'Yes! ResumeFit includes an Android application built with Capacitor. It has a tiny download footprint (under 30 MB), supports native PDF downloads and sharing, and synchronizes seamlessly with your web account.',
+      'Yes! Shortlist AI includes an Android application built with Capacitor. It has a tiny download footprint (under 30 MB), supports native PDF downloads and sharing, and synchronizes seamlessly with your web account.',
   },
   {
     question: 'How is my private data stored?',

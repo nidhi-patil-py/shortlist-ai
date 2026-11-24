@@ -4,7 +4,7 @@ import { ThemeContext, THEME_STORAGE_KEY, type Theme } from './useTheme'
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     try {
-      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null
+      const savedTheme = (localStorage.getItem(THEME_STORAGE_KEY) || localStorage.getItem('resumefit_theme')) as Theme | null
       if (savedTheme === 'light' || savedTheme === 'dark') {
         return savedTheme
       }

@@ -47,7 +47,7 @@ export const SignupPage: React.FC = () => {
   }
 
   const handleDemoSignIn = () => {
-    signInAsDemoUser('demo.candidate@resumefit.app', 'Alex Morgan (Demo)')
+    signInAsDemoUser('demo.candidate@shortlist.ai', 'Alex Morgan (Demo)')
     navigate('/dashboard', { replace: true })
   }
 

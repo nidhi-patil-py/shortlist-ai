@@ -54,13 +54,13 @@ export const AtsExplanationSection: React.FC = () => {
             </ul>
           </div>
 
-          {/* Good Practice (ResumeFit Method) */}
+          {/* Good Practice (Shortlist AI Method) */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-emerald-200 dark:border-emerald-900/60 shadow-xs space-y-5">
             <div className="flex items-center justify-between border-b border-emerald-100 dark:border-emerald-900/40 pb-4">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  The ResumeFit Clean Standard
+                  The Shortlist AI Clean Standard
                 </h3>
               </div>
               <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
@@ -97,7 +97,7 @@ export const AtsExplanationSection: React.FC = () => {
               <span>Transparent Internal Scoring Benchmark</span>
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-              How ResumeFit Calculates Your Estimated ATS Score
+              How Shortlist AI Calculates Your Estimated ATS Score
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
               Our 0-100 score is an honest, rule-based diagnostic calculated transparently across 4 core dimensions:

@@ -63,7 +63,7 @@ const PHONE_REGEX = /[\d+()\-.\s]{7,}/
 const METRIC_REGEX = /(\b\d+([.,]\d+)?\s*(%|percent|k|m|x|users|clients|requests|ms|s|sec|seconds|days|weeks|hours|pts)?\b|[$€£₹]\s*\d+)/i
 
 export const ATS_DISCLAIMER =
-  "ResumeFit's ATS Score is an internal, transparent educational diagnostic based on standard Applicant Tracking System parsing guidelines (clean single-column layout, keyword alignment, quantified achievements, and standard headings). It does not guarantee employment or predict any specific company's proprietary hiring algorithm."
+  "Shortlist AI's ATS Score is an internal, transparent educational diagnostic based on standard Applicant Tracking System parsing guidelines (clean single-column layout, keyword alignment, quantified achievements, and standard headings). It does not guarantee employment or predict any specific company's proprietary hiring algorithm."
 
 /**
  * Deterministic ATS Scoring Engine

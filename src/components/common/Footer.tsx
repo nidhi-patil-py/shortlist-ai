@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
                 <FileText className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Resume<span className="text-indigo-600 dark:text-indigo-400">Fit</span>
+                Shortlist <span className="text-indigo-600 dark:text-indigo-400">AI</span>
               </span>
             </Link>
             <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
@@ -105,14 +105,14 @@ export const Footer: React.FC = () => {
               Honest ATS Disclaimer:
             </p>
             <p>
-              ResumeFit helps you organize, surface, and format your real qualifications to align with job descriptions and applicant tracking systems. We never fabricate degrees, work experience, or technical competencies. An estimated ATS score is an internal diagnostic benchmark and does not guarantee job interviews or hiring decisions by third-party employers.
+              Shortlist AI helps you organize, surface, and format your real qualifications to align with job descriptions and applicant tracking systems. We never fabricate degrees, work experience, or technical competencies. An estimated ATS score is an internal diagnostic benchmark and does not guarantee job interviews or hiring decisions by third-party employers.
             </p>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-500 gap-4">
-          <p>© {CURRENT_YEAR} ResumeFit. All rights reserved.</p>
+          <p>© {CURRENT_YEAR} Shortlist AI. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Built with precision for career growth.
           </p>

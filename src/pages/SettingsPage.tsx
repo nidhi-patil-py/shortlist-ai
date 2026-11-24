@@ -86,7 +86,7 @@ export const SettingsPage: React.FC = () => {
       ])
 
       const backupData = {
-        app: 'ResumeFit',
+        app: 'Shortlist AI',
         version: '1.0.0',
         exportedAt: new Date().toISOString(),
         user: {
@@ -104,7 +104,7 @@ export const SettingsPage: React.FC = () => {
       const a = document.createElement('a')
       const sanitizedName = (user.fullName || 'User').replace(/[^a-zA-Z0-9_-]/g, '_')
       a.href = url
-      a.download = `resumefit_backup_${sanitizedName}_${Date.now()}.json`
+      a.download = `shortlist_ai_backup_${sanitizedName}_${Date.now()}.json`
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
@@ -206,6 +206,8 @@ export const SettingsPage: React.FC = () => {
   // Clear Local Data
   const handleClearLocalData = () => {
     if (!user) return
+    localStorage.removeItem(`shortlistai_user_${user.id}_profile`)
+    localStorage.removeItem(`shortlistai_user_${user.id}_resumes`)
     localStorage.removeItem(`resumefit_user_${user.id}_profile`)
     localStorage.removeItem(`resumefit_user_${user.id}_resumes`)
     setConfirmClearOpen(false)
@@ -438,7 +440,7 @@ export const SettingsPage: React.FC = () => {
                   Restore Backup (JSON)
                 </div>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                  Upload a previously exported ResumeFit JSON file to restore your qualifications.
+                  Upload a previously exported Shortlist AI JSON file to restore your qualifications.
                 </p>
               </div>
 

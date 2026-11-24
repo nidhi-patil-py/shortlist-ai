@@ -1,9 +1,9 @@
 # Supabase Database Setup & Configuration
 
-This directory contains the database schema and Row Level Security (RLS) setup for **ResumeFit**.
+This directory contains the database schema and Row Level Security (RLS) setup for **Shortlist AI**.
 
 ## Step 1: Create a Supabase Project
-1. Visit [https://supabase.com](https://supabase.com) and create a free project named `resumefit`.
+1. Visit [https://supabase.com](https://supabase.com) and create a free project named `shortlist-ai`.
 2. Navigate to **Project Settings > API**.
 3. Copy your:
    - **Project URL** (`https://<project-id>.supabase.co`)
@@ -31,4 +31,4 @@ VITE_SUPABASE_ANON_KEY=your-anon-key-here
 ```
 
 ## Local Demo Mode
-If `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are omitted or left empty, ResumeFit automatically switches to **Local Demo Mode** using local browser storage with strict user isolation, allowing offline evaluation without configuring a database.
+If `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are omitted or left empty, Shortlist AI automatically switches to **Local Demo Mode** using local browser storage with strict user isolation, allowing offline evaluation without configuring a database.

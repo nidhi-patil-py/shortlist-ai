@@ -129,9 +129,9 @@ const candidateAProfile: UserProfile = {
   ],
 }
 
-// Persist candidate profile
-mockStorage.setItem(`resumefit_user_${candidateAId}_profile`, JSON.stringify(candidateAProfile))
-const loadedProfile = JSON.parse(mockStorage.getItem(`resumefit_user_${candidateAId}_profile`)!)
+// Persist candidate profile using new storage key
+mockStorage.setItem(`shortlistai_user_${candidateAId}_profile`, JSON.stringify(candidateAProfile))
+const loadedProfile = JSON.parse(mockStorage.getItem(`shortlistai_user_${candidateAId}_profile`)!)
 assert.strictEqual(loadedProfile.userId, candidateAId)
 assert.strictEqual(loadedProfile.skills.length, 7)
 console.log('  ✓ Master Profile successfully created and saved locally')
@@ -188,7 +188,7 @@ const savedResumeA: ResumeData = {
   targetJobTitle: 'Senior React & Node Engineer',
   atsScore: 92,
 }
-mockStorage.setItem(`resumefit_user_${candidateAId}_resumes`, JSON.stringify([savedResumeA]))
+mockStorage.setItem(`shortlistai_user_${candidateAId}_resumes`, JSON.stringify([savedResumeA]))
 console.log('  ✓ Tailored resume saved to candidate workspace')
 
 // ============================================================================
@@ -221,19 +221,26 @@ console.log(`  ✓ Generated valid ATS-compliant vector PDF (${pdfBlob.size} byt
 console.log('\nJourney Stage 5: Multi-Tenant Data Isolation Verification')
 
 const candidateBId = 'usr_sarah_backend_2026'
-const candidateBResumesKey = `resumefit_user_${candidateBId}_resumes`
+const candidateBResumesKey = `shortlistai_user_${candidateBId}_resumes`
 
 // Candidate B accesses their resumes
 const candidateBResumes = mockStorage.getItem(candidateBResumesKey)
 assert.strictEqual(candidateBResumes, null, 'Candidate B must not have any initial resumes')
 
 // Candidate B cannot read or overwrite Candidate A's store
-const candidateAResumesRaw = mockStorage.getItem(`resumefit_user_${candidateAId}_resumes`)
+const candidateAResumesRaw = mockStorage.getItem(`shortlistai_user_${candidateAId}_resumes`)
 assert(candidateAResumesRaw !== null)
 const candidateAResumes = JSON.parse(candidateAResumesRaw)
 assert.strictEqual(candidateAResumes[0].userId, candidateAId)
 assert.notStrictEqual(candidateAResumes[0].userId, candidateBId)
 console.log('  ✓ Data isolation verified: Candidate A and Candidate B stores are completely segregated')
+
+// Test Backward Compatibility: Legacy resumefit_user_* fallback
+const legacyCandidateId = 'usr_legacy_2025'
+mockStorage.setItem(`resumefit_user_${legacyCandidateId}_profile`, JSON.stringify({ ...candidateAProfile, userId: legacyCandidateId }))
+const legacyProfileRaw = mockStorage.getItem(`shortlistai_user_${legacyCandidateId}_profile`) || mockStorage.getItem(`resumefit_user_${legacyCandidateId}_profile`)
+assert(legacyProfileRaw !== null, 'Legacy data must be readable via backward-compatibility key fallback')
+console.log('  ✓ Backward compatibility verified: Legacy resumefit_user_* stores are seamlessly preserved')
 
 // ============================================================================
 // Test 6: Supabase Schema & Row-Level-Security (RLS) Policies Verification

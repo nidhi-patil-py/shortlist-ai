@@ -41,7 +41,7 @@ export const LoginPage: React.FC = () => {
   }
 
   const handleDemoSignIn = () => {
-    signInAsDemoUser('demo.candidate@resumefit.app', 'Alex Morgan (Demo)')
+    signInAsDemoUser('demo.candidate@shortlist.ai', 'Alex Morgan (Demo)')
     navigate(from, { replace: true })
   }
 
@@ -71,7 +71,7 @@ export const LoginPage: React.FC = () => {
               <FileText className="w-6 h-6" />
             </div>
             <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Sign In to ResumeFit
+              Sign In to Shortlist AI
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400">
               Access your saved resumes and job matching tools

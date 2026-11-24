@@ -17,7 +17,7 @@ console.log('  ✓ Web runtime safely detected (no native crash)')
 
 // 2. Base64 Blob Conversion
 console.log('\nTest 2: Blob to Base64 Encoding for Native Filesystem')
-const sampleText = 'ResumeFit ATS PDF binary content'
+const sampleText = 'Shortlist AI ATS PDF binary content'
 const testBlob = new Blob([sampleText], { type: 'text/plain' })
 const base64 = await blobToBase64(testBlob)
 const decoded = Buffer.from(base64, 'base64').toString('utf-8')
@@ -29,8 +29,8 @@ console.log('\nTest 3: capacitor.config.ts Validation')
 const configPath = path.resolve('capacitor.config.ts')
 assert(fs.existsSync(configPath), 'capacitor.config.ts must exist')
 const configContent = fs.readFileSync(configPath, 'utf-8')
-assert(configContent.includes("appId: 'com.resumefit.app'"), 'Must define com.resumefit.app appId')
-assert(configContent.includes("appName: 'ResumeFit'"), 'Must define ResumeFit appName')
+assert(configContent.includes("appId: 'com.shortlistai.app'"), 'Must define com.shortlistai.app appId')
+assert(configContent.includes("appName: 'Shortlist AI'"), 'Must define Shortlist AI appName')
 assert(configContent.includes("webDir: 'dist'"), 'Must define dist as webDir')
 console.log('  ✓ capacitor.config.ts correctly configured for Android APK')
 
@@ -40,17 +40,17 @@ const androidRoot = path.resolve('android')
 assert(fs.existsSync(androidRoot), 'android/ folder must exist')
 assert(fs.existsSync(path.join(androidRoot, 'app/build.gradle')), 'android/app/build.gradle must exist')
 assert(fs.existsSync(path.join(androidRoot, 'app/src/main/AndroidManifest.xml')), 'AndroidManifest.xml must exist')
-assert(fs.existsSync(path.join(androidRoot, 'app/src/main/java/com/resumefit/app/MainActivity.java')), 'MainActivity.java must exist')
+assert(fs.existsSync(path.join(androidRoot, 'app/src/main/java/com/shortlistai/app/MainActivity.java')), 'MainActivity.java must exist')
 
 const appGradle = fs.readFileSync(path.join(androidRoot, 'app/build.gradle'), 'utf-8')
-assert(appGradle.includes('com.resumefit.app'), 'app/build.gradle must use com.resumefit.app namespace/applicationId')
+assert(appGradle.includes('com.shortlistai.app'), 'app/build.gradle must use com.shortlistai.app namespace/applicationId')
 
 const stringsXml = fs.readFileSync(path.join(androidRoot, 'app/src/main/res/values/strings.xml'), 'utf-8')
-assert(stringsXml.includes('ResumeFit'), 'strings.xml must have ResumeFit app_name')
+assert(stringsXml.includes('Shortlist AI'), 'strings.xml must have Shortlist AI app_name')
 
 const colorsXml = fs.readFileSync(path.join(androidRoot, 'app/src/main/res/values/colors.xml'), 'utf-8')
 assert(colorsXml.includes('#4F46E5'), 'colors.xml must define #4F46E5 brand primary')
 
-console.log('  ✓ Android project verified: com.resumefit.app, MainActivity, strings, and colors intact')
+console.log('  ✓ Android project verified: com.shortlistai.app, MainActivity, strings, and colors intact')
 
 console.log('\n🎉 ALL CAPACITOR ANDROID INTEGRATION TESTS PASSED!')

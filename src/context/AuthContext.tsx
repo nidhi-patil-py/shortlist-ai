@@ -3,7 +3,8 @@ import { supabase, isSupabaseConfigured } from '../services/supabase'
 import type { User } from '../types/auth'
 import { AuthContext } from './useAuth'
 
-const LOCAL_DEMO_USER_KEY = 'resumefit_local_demo_user'
+const LOCAL_DEMO_USER_KEY = 'shortlistai_local_demo_user'
+const LEGACY_LOCAL_DEMO_USER_KEY = 'resumefit_local_demo_user'
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
@@ -16,7 +17,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const initAuth = async () => {
       // 1. Check if user was previously in Local Demo Mode
-      const savedDemoUser = localStorage.getItem(LOCAL_DEMO_USER_KEY)
+      const savedDemoUser = localStorage.getItem(LOCAL_DEMO_USER_KEY) || localStorage.getItem(LEGACY_LOCAL_DEMO_USER_KEY)
       if (savedDemoUser) {
         try {
           const parsed = JSON.parse(savedDemoUser)
@@ -28,6 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           return
         } catch {
           localStorage.removeItem(LOCAL_DEMO_USER_KEY)
+          localStorage.removeItem(LEGACY_LOCAL_DEMO_USER_KEY)
         }
       }
 
@@ -68,7 +70,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           })
           setIsDemoMode(false)
           localStorage.removeItem(LOCAL_DEMO_USER_KEY)
-        } else if (!localStorage.getItem(LOCAL_DEMO_USER_KEY)) {
+          localStorage.removeItem(LEGACY_LOCAL_DEMO_USER_KEY)
+        } else if (!localStorage.getItem(LOCAL_DEMO_USER_KEY) && !localStorage.getItem(LEGACY_LOCAL_DEMO_USER_KEY)) {
           setUser(null)
         }
         setIsLoading(false)
@@ -180,6 +183,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signOut = useCallback(async () => {
     if (isDemoMode) {
       localStorage.removeItem(LOCAL_DEMO_USER_KEY)
+      localStorage.removeItem(LEGACY_LOCAL_DEMO_USER_KEY)
       setUser(null)
       setIsDemoMode(false)
       return
@@ -193,6 +197,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
 
+    localStorage.removeItem(LOCAL_DEMO_USER_KEY)
+    localStorage.removeItem(LEGACY_LOCAL_DEMO_USER_KEY)
     setUser(null)
   }, [isDemoMode])
 
@@ -225,7 +231,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [])
 
   // Switch to demo mode
-  const signInAsDemoUser = useCallback((demoEmail = 'demo.candidate@resumefit.app', demoName = 'Demo Job Seeker') => {
+  const signInAsDemoUser = useCallback((demoEmail = 'demo.candidate@shortlist.ai', demoName = 'Demo Job Seeker') => {
     const demoUser: User = {
       id: 'demo-user-master',
       email: demoEmail,
@@ -240,6 +246,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Exit demo mode
   const exitDemoMode = useCallback(() => {
     localStorage.removeItem(LOCAL_DEMO_USER_KEY)
+    localStorage.removeItem(LEGACY_LOCAL_DEMO_USER_KEY)
     setUser(null)
     setIsDemoMode(false)
   }, [])

@@ -47,7 +47,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
-                Resume<span className="text-indigo-600 dark:text-indigo-400">Fit</span>
+                Shortlist <span className="text-indigo-600 dark:text-indigo-400">AI</span>
                 {isDemoMode ? (
                   <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
                     DEMO MODE

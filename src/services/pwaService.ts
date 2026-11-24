@@ -76,7 +76,10 @@ export function usePWAInstallPrompt(): UsePWAInstallReturn {
   const [canInstall, setCanInstall] = useState(Boolean(deferredPrompt))
   const [isDismissed, setIsDismissed] = useState(() => {
     if (typeof window === 'undefined') return false
-    return sessionStorage.getItem('resumefit_pwa_dismissed') === 'true'
+    return (
+      sessionStorage.getItem('shortlistai_pwa_dismissed') === 'true' ||
+      sessionStorage.getItem('resumefit_pwa_dismissed') === 'true'
+    )
   })
 
   useEffect(() => {
@@ -111,7 +114,7 @@ export function usePWAInstallPrompt(): UsePWAInstallReturn {
 
   const dismissPrompt = useCallback(() => {
     setIsDismissed(true)
-    sessionStorage.setItem('resumefit_pwa_dismissed', 'true')
+    sessionStorage.setItem('shortlistai_pwa_dismissed', 'true')
   }, [])
 
   return {

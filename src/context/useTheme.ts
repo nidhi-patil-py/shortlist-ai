@@ -9,7 +9,8 @@ export interface ThemeContextType {
   isDark: boolean
 }
 
-export const THEME_STORAGE_KEY = 'resumefit_theme'
+export const THEME_STORAGE_KEY = 'shortlistai_theme'
+export const LEGACY_THEME_STORAGE_KEY = 'resumefit_theme'
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 

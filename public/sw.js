@@ -1,4 +1,4 @@
-const CACHE_NAME = 'resumefit-v1.0.0'
+const CACHE_NAME = 'shortlistai-v1.0.0'
 
 const PRECACHE_ASSETS = [
   '/',

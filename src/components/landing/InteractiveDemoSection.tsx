@@ -78,7 +78,7 @@ export const InteractiveDemoSection: React.FC = () => {
             <span>Interactive Simulator</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            See ResumeFit Match a Job in Real-Time
+            See Shortlist AI Match a Job in Real-Time
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
             Switch target jobs to see how our deterministic matching engine extracts keywords, filters relevant projects, and scores compatibility.
@@ -185,7 +185,7 @@ export const InteractiveDemoSection: React.FC = () => {
                   ))}
                 </div>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 pt-1">
-                  *Notice: ResumeFit flags missing skills so you know your gap, but <strong>never inserts false credentials</strong> into your resume.
+                  *Notice: Shortlist AI flags missing skills so you know your gap, but <strong>never inserts false credentials</strong> into your resume.
                 </p>
               </div>
             </div>

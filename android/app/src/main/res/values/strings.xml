@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">ResumeFit</string>
-    <string name="title_activity_main">ResumeFit</string>
-    <string name="package_name">com.resumefit.app</string>
-    <string name="custom_url_scheme">com.resumefit.app</string>
+    <string name="app_name">Shortlist AI</string>
+    <string name="title_activity_main">Shortlist AI</string>
+    <string name="package_name">com.shortlistai.app</string>
+    <string name="custom_url_scheme">com.shortlistai.app</string>
 </resources>

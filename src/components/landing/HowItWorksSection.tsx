@@ -39,7 +39,7 @@ export const HowItWorksSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            How ResumeFit Works
+            How Shortlist AI Works
           </h2>
           <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             From Generic Profile to Job-Tailored Resume in 4 Simple Steps
@@ -87,8 +87,8 @@ export const HowItWorksSection: React.FC = () => {
         <div className="mt-12 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 rounded-xl p-4 sm:p-5 flex items-start gap-3.5 max-w-3xl mx-auto">
           <ShieldAlert className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
           <div className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
-            <span className="font-bold">Our Ethical Engineering Promise:</span> ResumeFit will{' '}
-            <strong>never</strong> invent skills, fake company titles, or forge college credentials you do not possess. If a job description asks for Docker and you do not know Docker, ResumeFit highlights it as a missing skill so you can learn it—never lie about it.
+            <span className="font-bold">Our Ethical Engineering Promise:</span> Shortlist AI will{' '}
+            <strong>never</strong> invent skills, fake company titles, or forge college credentials you do not possess. If a job description asks for Docker and you do not know Docker, Shortlist AI highlights it as a missing skill so you can learn it—never lie about it.
           </div>
         </div>
       </div>

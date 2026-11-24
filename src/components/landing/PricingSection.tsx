@@ -49,7 +49,7 @@ export const PricingSection: React.FC = () => {
                   '3 JD matches/month',
                   'Classic Standard template',
                   'Basic ATS score overview',
-                  'PDF export with subtle ResumeFit watermark',
+                  'PDF export with subtle Shortlist AI watermark',
                 ].map((perk) => (
                   <div key={perk} className="flex items-start gap-2.5">
                     <div className="w-4 h-4 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">

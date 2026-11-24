@@ -121,8 +121,9 @@ export const createEmptyProfile = (userId: string, email = ''): UserProfile => (
   certifications: [],
 })
 
-// Helper keys for local demo mode isolation
-const getStorageKey = (userId: string, key: string) => `resumefit_user_${userId}_${key}`
+// Helper keys for local demo mode isolation (with backward compatibility)
+const getStorageKey = (userId: string, key: string) => `shortlistai_user_${userId}_${key}`
+const getLegacyKey = (userId: string, key: string) => `resumefit_user_${userId}_${key}`
 
 export const storageService = {
   // --------------------------------------------------------------------------
@@ -211,8 +212,8 @@ export const storageService = {
       }
     }
 
-    // Local / Demo Storage
-    const saved = localStorage.getItem(getStorageKey(userId, 'profile'))
+    // Local / Demo Storage (reads new key or legacy key)
+    const saved = localStorage.getItem(getStorageKey(userId, 'profile')) || localStorage.getItem(getLegacyKey(userId, 'profile'))
     if (saved) {
       try {
         return JSON.parse(saved)
@@ -383,7 +384,7 @@ export const storageService = {
       }
     }
 
-    const saved = localStorage.getItem(getStorageKey(userId, 'resumes'))
+    const saved = localStorage.getItem(getStorageKey(userId, 'resumes')) || localStorage.getItem(getLegacyKey(userId, 'resumes'))
     if (saved) {
       try {
         return JSON.parse(saved)

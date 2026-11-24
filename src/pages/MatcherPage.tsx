@@ -266,7 +266,7 @@ export const MatcherPage: React.FC = () => {
                 <div className="p-3 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                   <p className="leading-snug">
-                    <strong>Zero Hallucination Rule:</strong> ResumeFit will match your genuine skills and prioritize existing relevant projects. We will <em>never</em> inject fake credentials or fake employment history.
+                    <strong>Zero Hallucination Rule:</strong> Shortlist AI will match your genuine skills and prioritize existing relevant projects. We will <em>never</em> inject fake credentials or fake employment history.
                   </p>
                 </div>
               </div>
@@ -404,7 +404,7 @@ export const MatcherPage: React.FC = () => {
                       </div>
                     )}
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 pt-1">
-                      *Note: If you have experience in any of these skills, add them to your Master Profile. ResumeFit will <strong>never invent or add them automatically</strong>.
+                      *Note: If you have experience in any of these skills, add them to your Master Profile. Shortlist AI will <strong>never invent or add them automatically</strong>.
                     </p>
                   </div>
 

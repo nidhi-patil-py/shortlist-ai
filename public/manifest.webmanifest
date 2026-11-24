@@ -1,6 +1,6 @@
 {
-  "name": "ResumeFit - ATS Resume Builder",
-  "short_name": "ResumeFit",
+  "name": "Shortlist AI - ATS Resume Builder",
+  "short_name": "Shortlist AI",
   "description": "Lightweight ATS-friendly resume builder and job description matcher. Generate tailored resumes matching your real qualifications.",
   "start_url": "/",
   "scope": "/",

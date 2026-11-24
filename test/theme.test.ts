@@ -7,15 +7,16 @@ console.log('🧪 Starting Dark Mode & Theme System Tests...\n')
 
 // 1. Storage Key Invariant
 console.log('Test 1: Theme Storage Key Validation')
-assert.strictEqual(THEME_STORAGE_KEY, 'resumefit_theme', 'THEME_STORAGE_KEY must be "resumefit_theme"')
-console.log('  ✓ Storage key conforms to "resumefit_theme"')
+assert.strictEqual(THEME_STORAGE_KEY, 'shortlistai_theme', 'THEME_STORAGE_KEY must be "shortlistai_theme"')
+console.log('  ✓ Storage key conforms to "shortlistai_theme"')
 
 // 2. Zero-Flash Head Script in index.html
 console.log('\nTest 2: Zero-Flash Script in index.html')
 const indexHtmlPath = path.resolve('index.html')
 assert(fs.existsSync(indexHtmlPath), 'index.html must exist')
 const indexHtml = fs.readFileSync(indexHtmlPath, 'utf-8')
-assert(indexHtml.includes('resumefit_theme'), 'index.html must check resumefit_theme from localStorage')
+assert(indexHtml.includes('shortlistai_theme'), 'index.html must check shortlistai_theme from localStorage')
+assert(indexHtml.includes('resumefit_theme'), 'index.html must check backward-compatible resumefit_theme')
 assert(indexHtml.includes('prefers-color-scheme: dark'), 'index.html must check OS prefers-color-scheme: dark')
 assert(indexHtml.includes("classList.add('dark')"), "index.html must add 'dark' class before rendering")
 assert(indexHtml.includes("classList.remove('dark')"), "index.html must remove 'dark' class for light mode")

@@ -28,7 +28,7 @@ export const HeroSection: React.FC = () => {
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto font-normal">
-            Create your master profile once. Paste any target job description, and ResumeFit extracts the required keywords, highlights your matching skills & projects, and creates a tailored, ATS-ready resume based strictly on your genuine qualifications.
+            Create your master profile once. Paste any target job description, and Shortlist AI extracts the required keywords, highlights your matching skills & projects, and creates a tailored, ATS-ready resume based strictly on your genuine qualifications.
           </p>
 
           {/* CTA Group */}
@@ -79,7 +79,7 @@ export const HeroSection: React.FC = () => {
                 <span className="w-3 h-3 rounded-full bg-rose-400 inline-block" />
                 <span className="w-3 h-3 rounded-full bg-amber-400 inline-block" />
                 <span className="w-3 h-3 rounded-full bg-emerald-400 inline-block" />
-                <span className="ml-2 font-mono text-slate-600 dark:text-slate-400 font-medium hidden sm:inline">resumefit.app/generator</span>
+                <span className="ml-2 font-mono text-slate-600 dark:text-slate-400 font-medium hidden sm:inline">shortlist.ai/generator</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-semibold border border-emerald-200 dark:border-emerald-800">

@@ -1,4 +1,4 @@
-console.log('🚀 Running ResumeFit Automated Test Suite...\n')
+console.log('🚀 Running Shortlist AI Automated Test Suite...\n')
 
 import './jdMatcher.test.ts'
 import './atsChecker.test.ts'

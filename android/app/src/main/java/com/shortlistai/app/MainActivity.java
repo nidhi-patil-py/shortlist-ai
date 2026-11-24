@@ -1,4 +1,4 @@
-package com.resumefit.app;
+package com.shortlistai.app;
 
 import com.getcapacitor.BridgeActivity;
 

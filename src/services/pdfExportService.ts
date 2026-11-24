@@ -13,7 +13,7 @@ export function formatResumeFilename(resume: ResumeData): string {
   const cleanName = name.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_')
   const cleanRole = role.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_')
 
-  return `${cleanName}_${cleanRole}_ResumeFit.pdf`
+  return `${cleanName}_${cleanRole}_Shortlist_AI.pdf`
 }
 
 /**
@@ -29,10 +29,10 @@ export function exportResumeViaPrint(resume: ResumeData, paperSize: PaperSize = 
   document.title = pdfFilename
 
   // Dynamically configure @page size rule in case user selected US Letter vs A4
-  let styleEl = document.getElementById('resumefit-print-page-style')
+  let styleEl = document.getElementById('shortlistai-print-page-style') || document.getElementById('resumefit-print-page-style')
   if (!styleEl) {
     styleEl = document.createElement('style')
-    styleEl.id = 'resumefit-print-page-style'
+    styleEl.id = 'shortlistai-print-page-style'
     document.head.appendChild(styleEl)
   }
 

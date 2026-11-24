@@ -78,7 +78,7 @@ const mockResume: ResumeData = {
 console.log('Test 1: Filename Formatting and Sanitization')
 const filename = formatResumeFilename(mockResume)
 assert(
-  filename.startsWith('Jane_C_Developer_Senior_Frontend_Developer_ResumeFit.pdf'),
+  filename.startsWith('Jane_C_Developer_Senior_Frontend_Developer_Shortlist_AI.pdf'),
   `Unexpected filename: ${filename}`
 )
 console.log(`  ✓ Formatted filename: ${filename}`)

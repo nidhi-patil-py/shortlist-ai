@@ -667,7 +667,7 @@ export const AtsCheckerPage: React.FC = () => {
                             </div>
                           )}
                           <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                            *Note: If you have genuine background in these skills, add them in the builder. ResumeFit will <strong>never invent them</strong>.
+                            *Note: If you have genuine background in these skills, add them in the builder. Shortlist AI will <strong>never invent them</strong>.
                           </p>
                         </div>
                       )}

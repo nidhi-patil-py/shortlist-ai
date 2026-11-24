@@ -1,5 +1,5 @@
 -- ==============================================================================
--- ResumeFit Supabase PostgreSQL Database Schema
+-- Shortlist AI Supabase PostgreSQL Database Schema
 -- Version: 1.1.0
 -- Architecture: Row Level Security (RLS) with strict User Isolation
 -- ==============================================================================

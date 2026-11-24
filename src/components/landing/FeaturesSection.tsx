@@ -28,13 +28,13 @@ export const FeaturesSection: React.FC = () => {
       icon: FileSpreadsheet,
       title: 'Recruiter-Tested ATS Layouts',
       description:
-        'Multi-column resumes often break automated parsers. ResumeFit enforces clean, parse-ready single-column structures that machines read smoothly.',
+        'Multi-column resumes often break automated parsers. Shortlist AI enforces clean, parse-ready single-column structures that machines read smoothly.',
     },
     {
       icon: SlidersHorizontal,
       title: 'Project & Experience Prioritization',
       description:
-        'Have 6 personal projects? ResumeFit automatically orders and highlights the 2-3 most relevant projects that match the target position.',
+        'Have 6 personal projects? Shortlist AI automatically orders and highlights the 2-3 most relevant projects that match the target position.',
     },
     {
       icon: Code2,
@@ -73,7 +73,7 @@ export const FeaturesSection: React.FC = () => {
             Everything You Need To Pass Screening Filters
           </p>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-            Modern hiring systems scan hundreds of applications in seconds. ResumeFit aligns your real story with what the software is programmed to find.
+            Modern hiring systems scan hundreds of applications in seconds. Shortlist AI aligns your real story with what the software is programmed to find.
           </p>
         </div>
 

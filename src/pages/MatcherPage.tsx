@@ -336,6 +336,36 @@ export const MatcherPage: React.FC = () => {
                     </div>
                   </div>
 
+                  {/* Primary CTA Button (Top Placement for Immediate Generation) */}
+                  <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div className="space-y-0.5 text-center sm:text-left">
+                      <span className="text-[11px] font-semibold text-indigo-200 uppercase tracking-wider flex items-center justify-center sm:justify-start gap-1">
+                        <Sparkles className="w-3 h-3 text-amber-300" />
+                        <span>Ready to Tailor</span>
+                      </span>
+                      <h3 className="text-sm sm:text-base font-bold">Generate Tailored Resume</h3>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleGenerateResume}
+                      disabled={isGenerating}
+                      className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-indigo-900 bg-white hover:bg-indigo-50 transition-all shadow-sm active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+                    >
+                      {isGenerating ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+                          <span>Generating...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Generate Tailored Resume</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+
                   {/* Matched Keywords (Green) */}
                   <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
                     <div className="flex items-center justify-between">

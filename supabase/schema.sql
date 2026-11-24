@@ -92,7 +92,7 @@ create table if not exists public.certifications (
 
 -- 8. Resumes Table (Generated & Job-Matched Resumes)
 create table if not exists public.resumes (
-  id uuid primary key default uuid_generate_v4(),
+  id text primary key default uuid_generate_v4()::text,
   user_id uuid references auth.users(id) on delete cascade not null,
   title text not null default 'Untitled Resume',
   target_job_title text default '',
@@ -104,6 +104,7 @@ create table if not exists public.resumes (
   experience jsonb not null default '[]'::jsonb,
   projects jsonb not null default '[]'::jsonb,
   certifications jsonb not null default '[]'::jsonb,
+  settings jsonb not null default '{}'::jsonb,
   ats_score integer default 0,
   matched_keywords text[] default array[]::text[],
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
